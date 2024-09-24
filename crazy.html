@@ -3,73 +3,84 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Editor Live</title>
+  <title>Online IDE</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    /* Add some basic styling to make the IDE look better */
     body {
-      display: flex;
+      font-family: Arial, sans-serif;
       margin: 0;
-      height: 100vh;
+      padding: 20px;
+      background-color: #f0f0f0;
     }
-    #editor, #preview {
+    #editor-section, #preview-section {
       width: 50%;
       padding: 10px;
-    }
-    #editor {
-      display: flex;
-      flex-direction: column;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background-color: #fff;
     }
     textarea {
-      flex: 1;
       width: 100%;
+      height: 30vh;
       margin-bottom: 10px;
-      font-family: monospace;
-      font-size: 14px;
+      font-size: 16px;
       padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+      background-color: #1e1e1e;
+      color: white;
+      border: none;
+      resize: none;
     }
     iframe {
       width: 100%;
       height: 100%;
       border: none;
     }
+    /* Add some basic button styling */
+    button {
+      background-color: #4CAF50;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #3e8e41;
+    }
   </style>
 </head>
 <body>
-
-  <div id="editor">
-    <textarea id="html-code" placeholder="Digite o HTML aqui..."></textarea>
-    <textarea id="css-code" placeholder="Digite o CSS aqui..."></textarea>
-    <textarea id="js-code" placeholder="Digite o JavaScript aqui..."></textarea>
+  <div id="editor-section">
+    <textarea id="html-code" placeholder="Escreva o HTML aqui..."></textarea>
+    <textarea id="css-code" placeholder="Escreva o CSS aqui..."></textarea>
+    <textarea id="js-code" placeholder="Escreva o JavaScript aqui..."></textarea>
+    <button id="run-code">Executar Código</button>
   </div>
-
-  <div id="preview">
-    <iframe id="output"></iframe>
+  <div id="preview-section">
+    <iframe id="output" sandbox="allow-scripts"></iframe>
   </div>
-
   <script>
+    // Get the textareas and iframe elements
     const htmlCode = document.getElementById('html-code');
     const cssCode = document.getElementById('css-code');
     const jsCode = document.getElementById('js-code');
     const output = document.getElementById('output');
-
+    const runCodeButton = document.getElementById('run-code');
+    
+    // Function to update the preview
     function updatePreview() {
       const html = htmlCode.value;
       const css = `<style>${cssCode.value}</style>`;
       const js = `<script>${jsCode.value}<\/script>`;
-
-      const previewContent = `${html} ${css} ${js}`;
-      output.srcdoc = previewContent;
+      
+      output.srcdoc = `${html} ${css} ${js}`;
     }
-
-    // Atualizar o preview em tempo real
+    
+    // Add event listeners to the textareas and button
     htmlCode.addEventListener('input', updatePreview);
     cssCode.addEventListener('input', updatePreview);
     jsCode.addEventListener('input', updatePreview);
+    runCodeButton.addEventListener('click', updatePreview);
   </script>
-
 </body>
 </html>
