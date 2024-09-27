@@ -14,11 +14,11 @@ body {
 
 header {
   background-color: #000000;
-  padding: 30px;
+  padding: 20px;
 }
 
 #logo img {
-  width: 100px; /* Tamanho ajustável */
+  width: 150px; /* Tamanho ajustável */
 }
 
 #menu {

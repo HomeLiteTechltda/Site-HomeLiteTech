@@ -1,0 +1,12 @@
+[
+    {"username": "joao", "email": "joao@gmail.com", "password": "1234"},
+    {"username": "maria", "email": "maria@gmail.com", "password": "5678"},
+    {"username": "luis", "email": "luis@gmail.com", "password": "abcd"},
+    {"username": "ana", "email": "ana@gmail.com", "password": "efgh"},
+    {"username": "pedro", "email": "pedro@gmail.com", "password": "ijkl"},
+    {"username": "paula", "email": "paula@gmail.com", "password": "mnop"},
+    {"username": "julio", "email": "julio@gmail.com", "password": "qrst"},
+    {"username": "silvia", "email": "silvia@gmail.com", "password": "uvwx"},
+    {"username": "roberto", "email": "roberto@gmail.com", "password": "yz12"}
+  ]
+  
