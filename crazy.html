@@ -1,86 +1,253 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Online IDE</title>
-  <style>
-    /* Add some basic styling to make the IDE look better */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background-color: #f0f0f0;
-    }
-    #editor-section, #preview-section {
-      width: 50%;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      background-color: #fff;
-    }
-    textarea {
-      width: 100%;
-      height: 30vh;
-      margin-bottom: 10px;
-      font-size: 16px;
-      padding: 10px;
-      background-color: #1e1e1e;
-      color: white;
-      border: none;
-      resize: none;
-    }
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-    /* Add some basic button styling */
-    button {
-      background-color: #4CAF50;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #3e8e41;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor Online - Semelhante ao CodePen</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/dracula.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/hint/show-hint.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #222;
+            color: white;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #444;
+        }
+        
+        h1 {
+            font-size: 24px;
+        }
+        
+        button {
+            padding: 8px 12px;
+            background-color: #555;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .container {
+            display: flex;
+            flex: 1;
+        }
+        
+        .editor {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .tabs {
+            display: flex;
+            background: #333;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid #444;
+        }
+        
+        .tab.active {
+            background: #555;
+        }
+        
+        .CodeMirror {
+            height: auto;
+            flex: 1;
+            border: none;
+            resize: none;
+            background-color: #333;
+            color: white;
+        }
+        
+        .preview {
+            width: 50%;
+            padding: 10px;
+            background: #f0f0f0;
+            color: #000;
+            overflow: auto;
+        }
+        
+        #preview-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        footer {
+            background-color: #444;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
-  <div id="editor-section">
-    <textarea id="html-code" placeholder="Escreva o HTML aqui..."></textarea>
-    <textarea id="css-code" placeholder="Escreva o CSS aqui..."></textarea>
-    <textarea id="js-code" placeholder="Escreva o JavaScript aqui..."></textarea>
-    <button id="run-code">Executar Código</button>
-  </div>
-  <div id="preview-section">
-    <iframe id="output" sandbox="allow-scripts"></iframe>
-  </div>
-  <script>
-    // Get the textareas and iframe elements
-    const htmlCode = document.getElementById('html-code');
-    const cssCode = document.getElementById('css-code');
-    const jsCode = document.getElementById('js-code');
-    const output = document.getElementById('output');
-    const runCodeButton = document.getElementById('run-code');
-    
-    // Function to update the preview
-    function updatePreview() {
-      const html = htmlCode.value;
-      const css = `<style>${cssCode.value}</style>`;
-      const js = `<script>${jsCode.value}<\/script>`;
-      
-      output.srcdoc = `${html} ${css} ${js}`;
-    }
-    
-    // Add event listeners to the textareas and button
-    htmlCode.addEventListener('input', updatePreview);
-    cssCode.addEventListener('input', updatePreview);
-    jsCode.addEventListener('input', updatePreview);
-    runCodeButton.addEventListener('click', updatePreview);
-  </script>
+    <header>
+        <h1>Editor Online</h1>
+        <button id="save-button" onclick="saveFile()">Salvar</button>
+    </header>
+    <div class="container">
+        <div class="editor">
+            <div class="tabs">
+                <div class="tab active" data-target="html">HTML</div>
+                <div class="tab" data-target="css">CSS</div>
+                <div class="tab" data-target="js">JS</div>
+            </div>
+            <textarea id="html" name="html" placeholder="Escreva seu HTML aqui..."></textarea>
+            <textarea id="css" name="css" placeholder="Escreva seu CSS aqui..."></textarea>
+            <textarea id="js" name="js" placeholder="Escreva seu JavaScript aqui..."></textarea>
+        </div>
+        <div class="preview">
+            <h2>Preview</h2>
+            <iframe id="preview-frame"></iframe>
+        </div>
+    </div>
+    <footer>
+        <p>Desenvolvido por você!</p>
+    </footer>
+
+    <!-- Adicionar bibliotecas CodeMirror -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/edit/closetag.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/edit/matchbrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/hint/show-hint.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/hint/html-hint.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/hint/css-hint.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/hint/javascript-hint.min.js"></script>
+
+    <script>
+        const htmlEditor = CodeMirror.fromTextArea(document.getElementById('html'), {
+            mode: 'xml',
+            theme: 'dracula',
+            lineNumbers: true,
+            autoCloseTags: true,
+            matchBrackets: true,
+            extraKeys: { "Ctrl-Space": "autocomplete" }
+        });
+
+        const cssEditor = CodeMirror.fromTextArea(document.getElementById('css'), {
+            mode: 'css',
+            theme: 'dracula',
+            lineNumbers: true,
+            autoCloseTags: true,
+            matchBrackets: true,
+            extraKeys: { "Ctrl-Space": "autocomplete" }
+        });
+
+        const jsEditor = CodeMirror.fromTextArea(document.getElementById('js'), {
+            mode: 'javascript',
+            theme: 'dracula',
+            lineNumbers: true,
+            matchBrackets: true,
+            extraKeys: { "Ctrl-Space": "autocomplete" },
+            hintOptions: {
+                hint: function(cm) {
+                    const cursor = cm.getCursor();
+                    const token = cm.getTokenAt(cursor);
+                    const completions = [
+                        { text: 'console.log()', displayText: 'console.log', className: 'hint-console' },
+                        { text: 'alert()', displayText: 'alert', className: 'hint-alert' },
+                        { text: 'document.getElementById()', displayText: 'document.getElementById', className: 'hint-doc' },
+                        { text: 'function', displayText: 'function', className: 'hint-function' },
+                        { text: 'let', displayText: 'let', className: 'hint-let' },
+                        { text: 'const', displayText: 'const', className: 'hint-const' },
+                        { text: 'var', displayText: 'var', className: 'hint-var' }
+                    ];
+                    return { list: completions.filter(item => item.text.startsWith(token.string)), from: CodeMirror.Pos(cursor.line, token.start), to: CodeMirror.Pos(cursor.line, token.end) };
+                }
+            }
+        });
+
+        const previewFrame = document.getElementById('preview-frame');
+        const tabs = document.querySelectorAll('.tab');
+
+        function updatePreview() {
+            const html = htmlEditor.getValue();
+            const css = `<style>${cssEditor.getValue()}</style>`;
+            const js = jsEditor.getValue();
+
+            const document = previewFrame.contentDocument || previewFrame.contentWindow.document;
+            document.open();
+            document.write(html + css + `<script>${js}<\/script>`);
+            document.close();
+        }
+
+        function switchTab(event) {
+            const target = event.target.dataset.target;
+
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            event.target.classList.add('active');
+
+            [htmlEditor, cssEditor, jsEditor].forEach(editor => {
+                editor.getWrapperElement().style.display = 'none';
+            });
+
+            switch (target) {
+                case 'html':
+                    htmlEditor.getWrapperElement().style.display = 'block';
+                    break;
+                case 'css':
+                    cssEditor.getWrapperElement().style.display = 'block';
+                    break;
+                case 'js':
+                    jsEditor.getWrapperElement().style.display = 'block';
+                    break;
+            }
+
+            updatePreview();
+        }
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', switchTab);
+        });
+
+        // Atualiza a pré-visualização ao digitar em qualquer editor
+        [htmlEditor, cssEditor, jsEditor].forEach(editor => {
+            editor.on('change', updatePreview);
+        });
+
+        function saveFile() {
+            const html = htmlEditor.getValue();
+            const css = `<style>${cssEditor.getValue()}</style>`;
+            const js = `<script>${jsEditor.getValue()}<\/script>`;
+            
+            const blob = new Blob([html + css + js], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'meu_site.html'; // Nome do arquivo que será gerado
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url); // Libera o objeto URL
+        }
+    </script>
 </body>
 </html>
