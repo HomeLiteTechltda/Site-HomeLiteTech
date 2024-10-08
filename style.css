@@ -1,24 +1,24 @@
 *{
   font-family: 'Teko', sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 body {
-    font-family: 'Teko', sans-serif;
-    margin: 0;
-    padding: 0;
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'Teko', sans-serif;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  font-style: normal;
 }
 
 header {
-  background-color: #000000;
+  background-color: #1c1c1c; /* Cinza escuro para um visual elegante */
   padding: 20px;
 }
 
 #logo img {
-  width: 150px; /* Tamanho ajustável */
+  width: 150px;
 }
 
 #menu {
@@ -28,7 +28,7 @@ header {
 }
 
 #menu input {
-  margin-left: auto; /* Centraliza o input à direita */
+  margin-left: auto;
 }
 
 #beginning {
@@ -39,7 +39,7 @@ header {
 #background-image {
   width: 100%;
   height: auto;
-  opacity: 1.0; /* Torna a imagem um pouco mais clara */
+  opacity: 1.0;
 }
 
 #beginning h2 {
@@ -47,14 +47,14 @@ header {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: white;
+  color: #e0dfd5; /* Bege claro */
   font-size: 2rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0); /* Sombra para o texto ficar mais legível */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Sombra suave */
 }
 
 #middle {
   padding: 50px;
-  background-color: #f9f9f9;
+  background-color: #2b2b2b; /* Cinza médio escuro */
 }
 
 .container {
@@ -65,15 +65,15 @@ header {
 
 .title h2 {
   font-size: 2rem;
-  color: #333;
+  color: #e0dfd5; /* Cor bege suave */
 }
 
 .title h2 span {
-  color: #ff5e14; /* Cor para o 'ESPECIALISTAS' */
+  color: #c79a53; /* Dourado escuro */
 }
 
 .title p {
-  color: #666;
+  color: #a6a6a6; /* Cinza elegante */
   font-size: 2rem;
 }
 
@@ -85,11 +85,11 @@ header {
 }
 
 .grid-item {
-  background: #fff;
-  border: 1px solid #ddd;
+  background: #3c3c3c; /* Cinza forte para o fundo */
+  border: 1px solid #555; /* Cinza mais escuro */
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .grid-item img {
@@ -99,12 +99,12 @@ header {
 
 .grid-item h3 {
   font-size: 1.5rem;
-  color: #333;
+  color: #c79a53; /* Dourado escuro */
 }
 
 .grid-item p {
   font-size: 1rem;
-  color: #666;
+  color: #e0dfd5; /* Bege claro */
 }
 
 @media (max-width: 768px) {
@@ -115,7 +115,7 @@ header {
 
 #services {
   padding: 60px 0;
-  background-color: #f8f9fa;
+  background-color: #1f1f1f; /* Cinza escuro */
 }
 
 .container {
@@ -126,74 +126,30 @@ header {
 
 h2 {
   font-size: 2.5rem;
-  color: #333;
+  color: #e0dfd5;
   margin-bottom: 40px;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.grid-item {
-  background: #fff;
-  border: 1px solid #e0e0e0;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .grid-item:hover {
   transform: translateY(-10px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Sombra mais escura */
 }
 
 .grid-item h3 {
-  font-size: 1.75rem;
-  color: #ff5e14;
+  color: #c79a53;
   margin-bottom: 15px;
 }
 
 .grid-item p {
-  font-size: 1rem;
-  color: #555;
-  line-height: 1.6;
-}
-
-@media (max-width: 1024px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 480px) {
-  h2 {
-    font-size: 2rem;
-  }
-
-  .grid-item h3 {
-    font-size: 1.5rem;
-  }
-
-  .grid-item p {
-    font-size: 0.9rem;
-  }
+  color: #a6a6a6; /* Cinza elegante */
 }
 
 hr {
   border: none;
-  height: 4px; /* Altura do hr */
-  background: linear-gradient(to right, #ff5e14, #bb4610); /* Degradê de azul */
-  border-radius: 5px; /* Bordas arredondadas */
-  margin: 40px 0; /* Margem para espaçamento */
+  height: 4px;
+  background: linear-gradient(to right, #c79a53, #806a3e); /* Degradê em tons de dourado */
+  border-radius: 5px;
+  margin: 40px 0;
 }
 
 #footer ul {
@@ -203,8 +159,8 @@ hr {
 }
 
 .footer-section {
-  background: #0d0d0d;
-  color: #ccc;
+  background: #141414; /* Preto elegante */
+  color: #e0dfd5; /* Bege claro */
   padding: 50px 0;
 }
 
@@ -213,20 +169,20 @@ hr {
 }
 
 .single-cta i {
-  color: #ff5e14;
+  color: #c79a53; /* Ícones em dourado */
   font-size: 28px;
   float: left;
   margin-right: 15px;
 }
 
 .cta-text h4 {
-  color: #ffffff;
+  color: #e0dfd5;
   font-size: 18px;
   margin-bottom: 5px;
 }
 
 .cta-text span {
-  color: #888;
+  color: #a6a6a6;
   font-size: 14px;
 }
 
@@ -240,30 +196,30 @@ hr {
 
 .footer-text p {
   font-size: 14px;
-  color: #b3b3b3;
+  color: #a6a6a6;
   line-height: 1.6;
 }
 
 .footer-social-icon span {
-  color: #ffffff;
+  color: #e0dfd5;
   display: block;
   font-size: 18px;
   margin-bottom: 20px;
 }
 
 .footer-social-icon a {
-  color: #ffffff;
+  color: #e0dfd5;
   font-size: 16px;
   margin-right: 15px;
   transition: color 0.3s;
 }
 
 .footer-social-icon a:hover {
-  color: #ff5e14;
+  color: #c79a53; /* Dourado escuro ao passar o mouse */
 }
 
 .footer-widget-heading h3 {
-  color: #ffffff;
+  color: #e0dfd5;
   font-size: 18px;
   margin-bottom: 20px;
   position: relative;
@@ -276,7 +232,7 @@ hr {
   bottom: -10px;
   height: 2px;
   width: 40px;
-  background: #ff5e14;
+  background: #c79a53; /* Linha dourada */
 }
 
 .footer-widget ul li {
@@ -286,14 +242,14 @@ hr {
 }
 
 .footer-widget ul li a {
-  color: #888;
+  color: #a6a6a6;
   font-size: 14px;
   text-decoration: none;
   transition: color 0.3s;
 }
 
 .footer-widget ul li a:hover {
-  color: #ff5e14;
+  color: #c79a53;
 }
 
 .subscribe-form input {
@@ -301,14 +257,14 @@ hr {
   padding: 12px;
   border: none;
   background: #222;
-  color: #fff;
+  color: #e0dfd5;
 }
 
 .subscribe-form button {
   padding: 12px 25px;
   border: none;
-  background: #ff5e14;
-  color: #fff;
+  background: #c79a53;
+  color: #e0dfd5;
   cursor: pointer;
 }
 
@@ -319,7 +275,7 @@ hr {
 
 .copyright-text p {
   margin: 0;
-  color: #888;
+  color: #a6a6a6;
   font-size: 14px;
 }
 
@@ -329,11 +285,11 @@ hr {
 }
 
 .footer-menu li a {
-  color: #888;
+  color: #a6a6a6;
   font-size: 14px;
   transition: color 0.3s;
 }
 
 .footer-menu li a:hover {
-  color: #ff5e14;
+  color: #c79a53;
 }

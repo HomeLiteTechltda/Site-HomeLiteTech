@@ -4,64 +4,122 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editor Online e Checkout</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/dracula.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/hint/show-hint.min.css">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: Arial, sans-serif; display: flex; flex-direction: column; height: 100vh; background-color: #222; color: white; }
-
-        header { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; background-color: #444; }
-        h1 { font-size: 24px; }
-        button { padding: 8px 12px; background-color: #007bff; color: white; border: none; cursor: pointer; border-radius: 5px; }
-        button:hover { background-color: #0056b3; }
-
+        header { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; background-color: #333; }
+        h1 { font-size: 24px; color: #f4c842; }
+        button { padding: 8px 12px; background-color: #f4c842; color: #222; border: none; cursor: pointer; border-radius: 5px; }
+        button:hover { background-color: #d4a537; }
         .container { display: flex; flex: 1; }
-        
-        .editor-container {
-            display: flex; flex-direction: column; width: 50%; background-color: #222; padding: 20px;
-        }
-        
+        .editor-container { display: flex; flex-direction: column; width: 50%; background-color: #1a1a1a; padding: 20px; }
         .tabs { display: flex; background: #333; }
-        .tab { flex: 1; padding: 10px; text-align: center; cursor: pointer; border: 1px solid #444; color: white; }
+        .tab { flex: 1; padding: 10px; text-align: center; cursor: pointer; border: 1px solid #444; color: #e6e6e6; }
         .tab.active { background: #555; }
-
-        .CodeMirror { height: auto; flex: 1; background-color: #333; color: white; }
-        
-        .preview { flex: 1; padding: 10px; background: #f0f0f0; color: #000; overflow: auto; }
+        .editor { height: 100%; }
+        .preview { flex: 1; padding: 10px; background: #ffffff; color: #000000; overflow: auto; }
         #preview-frame { width: 100%; height: 100%; border: none; }
-
-        footer { background-color: #444; text-align: center; padding: 10px; }
-
-        /* Checkout Container */
+        footer { background-color: #333; text-align: center; padding: 10px; color: #f4c842; }
         .container-checkout { display: none; height: 100vh; justify-content: center; align-items: center; }
-        .checkout-container {
-            background-color: #333; padding: 20px; border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); width: 400px; text-align: center;
-        }
+        .checkout-container { background-color: #333; padding: 20px; border-radius: 8px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); width: 400px; text-align: center; color: #e6e6e6; }
         .product-info, .payment-info { margin-bottom: 20px; }
-        input { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: none; }
-        .total { margin: 15px 0; font-size: 1.5em; }
-        .success-animation { display: none; margin-top: 20px; font-size: 1.2em; }
+        input { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: none; background-color: #444; color: #f4c842; }
+        .total { margin: 15px 0; font-size: 1.5em; color: #f4c842; }
+        .success-animation { display: none; margin-top: 20px; font-size: 1.2em; color: #f4c842; }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.38.0/min/vs/editor/editor.main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.38.0/min/vs/loader.js"></script>
+    <script>
+        require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.38.0/min/vs' } });
+        require(['vs/editor/editor.main'], function() {
+            // Inicialização do Monaco Editor
+            const htmlEditor = monaco.editor.create(document.getElementById('html-editor'), {
+                value: '<!-- Escreva seu HTML aqui -->',
+                language: 'html',
+                theme: 'vs-dark'
+            });
+
+            const cssEditor = monaco.editor.create(document.getElementById('css-editor'), {
+                value: '/* Escreva seu CSS aqui */',
+                language: 'css',
+                theme: 'vs-dark'
+            });
+
+            const jsEditor = monaco.editor.create(document.getElementById('js-editor'), {
+                value: '// Escreva seu JavaScript aqui',
+                language: 'javascript',
+                theme: 'vs-dark'
+            });
+
+            // Atualiza o iframe de preview
+            function updatePreview() {
+                const html = htmlEditor.getValue();
+                const css = cssEditor.getValue();
+                const js = jsEditor.getValue();
+                const iframe = document.getElementById('preview-frame');
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+
+                iframeDoc.open();
+                iframeDoc.write(html + `<style>${css}</style>` + `<script>${js}<\/script>`);
+                iframeDoc.close();
+            }
+
+            // Muda as abas do editor
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const target = this.dataset.target;
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+
+                    document.querySelectorAll('.editor').forEach((editor) => {
+                        editor.style.display = 'none';
+                    });
+
+                    document.getElementById(target).style.display = 'block';
+                });
+            });
+
+            // Salva o código e vai para o checkout
+            document.getElementById('save-button').onclick = function() {
+                const code = {
+                    html: htmlEditor.getValue(),
+                    css: cssEditor.getValue(),
+                    js: jsEditor.getValue()
+                };
+                console.log('Código salvo:', code);
+                document.querySelector('.container').style.display = 'none';
+                document.querySelector('.container-checkout').style.display = 'flex';
+            };
+
+            // Completa a compra
+            document.querySelector('.purchase-btn').onclick = function() {
+                document.querySelector('.success-animation').style.display = 'block';
+            };
+
+            // Atualiza o preview sempre que o editor mudar
+            htmlEditor.onDidChangeModelContent(updatePreview);
+            cssEditor.onDidChangeModelContent(updatePreview);
+            jsEditor.onDidChangeModelContent(updatePreview);
+        });
+    </script>
 </head>
 <body>
 
     <header>
         <h1>Editor Online</h1>
-        <button id="save-button" onclick="goToCheckout()">Salvar e Ir para Checkout</button>
+        <button id="save-button">Salvar e Ir para Checkout</button>
     </header>
 
     <div class="container">
         <div class="editor-container">
             <div class="tabs">
-                <div class="tab active" data-target="html">HTML</div>
-                <div class="tab" data-target="css">CSS</div>
-                <div class="tab" data-target="js">JS</div>
+                <div class="tab active" data-target="html-editor">HTML</div>
+                <div class="tab" data-target="css-editor">CSS</div>
+                <div class="tab" data-target="js-editor">JS</div>
             </div>
-            <textarea id="html" name="html" placeholder="Escreva seu HTML aqui..."></textarea>
-            <textarea id="css" name="css" placeholder="Escreva seu CSS aqui..."></textarea>
-            <textarea id="js" name="js" placeholder="Escreva seu JavaScript aqui..."></textarea>
+            <div id="html-editor" class="editor" style="height: 100%;"></div>
+            <div id="css-editor" class="editor" style="display: none; height: 100%;"></div>
+            <div id="js-editor" class="editor" style="display: none; height: 100%;"></div>
         </div>
 
         <div class="preview">
@@ -71,7 +129,7 @@
     </div>
 
     <footer>
-        <p>Desenvolvido por você!</p>
+        <p>Desenvolvido por HomeLite Tech</p>
     </footer>
 
     <!-- Checkout Container -->
@@ -92,124 +150,12 @@
                 <input type="text" id="cvv" placeholder="CVV">
             </div>
 
-            <button class="purchase-btn" onclick="completePurchase()">Comprar</button>
+            <button class="purchase-btn">Comprar</button>
 
             <div class="success-animation">
                 🎉 Compra realizada com sucesso! 🎉
             </div>
         </div>
     </div>
-
-    <!-- Adicionar bibliotecas CodeMirror -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/xml/xml.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/css/css.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/javascript/javascript.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
-
-    <script>
-        // CodeMirror setups
-        const htmlEditor = CodeMirror.fromTextArea(document.getElementById('html'), { mode: 'xml', theme: 'dracula', lineNumbers: true });
-        const cssEditor = CodeMirror.fromTextArea(document.getElementById('css'), { mode: 'css', theme: 'dracula', lineNumbers: true });
-        const jsEditor = CodeMirror.fromTextArea(document.getElementById('js'), { mode: 'javascript', theme: 'dracula', lineNumbers: true });
-        const previewFrame = document.getElementById('preview-frame');
-
-        function updatePreview() {
-            const html = htmlEditor.getValue();
-            const css = `<style>${cssEditor.getValue()}</style>`;
-            const js = `<script>${jsEditor.getValue()}<\/script>`;
-            const doc = previewFrame.contentDocument || previewFrame.contentWindow.document;
-            doc.open();
-            doc.write(html + css + js);
-            doc.close();
-        }
-
-        // Switch Tabs
-        const tabs = document.querySelectorAll('.tab');
-        tabs.forEach(tab => {
-            tab.addEventListener('click', (e) => {
-                tabs.forEach(t => t.classList.remove('active'));
-                e.target.classList.add('active');
-                switchTab(e.target.dataset.target);
-            });
-        });
-
-        function switchTab(target) {
-            [htmlEditor, cssEditor, jsEditor].forEach(editor => {
-                editor.getWrapperElement().style.display = 'none';
-            });
-
-            switch (target) {
-                case 'html':
-                    htmlEditor.getWrapperElement().style.display = 'block';
-                    break;
-                case 'css':
-                    cssEditor.getWrapperElement().style.display = 'block';
-                    break;
-                case 'js':
-                    jsEditor.getWrapperElement().style.display = 'block';
-                    break;
-            }
-            updatePreview();
-        }
-
-        // Update preview on change
-        [htmlEditor, cssEditor, jsEditor].forEach(editor => editor.on('change', updatePreview));
-
-        // Switch to Checkout
-        function goToCheckout() {
-            document.querySelector('.container').style.display = 'none';
-            document.querySelector('.container-checkout').style.display = 'flex';
-        }
-
-        // Checkout and download functionalities
-        function completePurchase() {
-            // Generate Invoice PDF
-            const { jsPDF } = window.jspdf;
-            const pdf = new jsPDF();
-            const orderNumber = Math.floor(Math.random() * 1000000);
-            const date = new Date().toLocaleDateString();
-
-            pdf.text('Nota Fiscal', 20, 10);
-            pdf.text('Produto: Download do código gerado', 20, 20);
-            pdf.text('Preço: R$300,00', 20, 30);
-            pdf.text(`Data: ${date}`, 20, 40);
-            pdf.text(`Número do Pedido: ${orderNumber}`, 20, 50);
-            pdf.save('nota-fiscal.pdf');
-
-            // Download generated code as a zip file
-            setTimeout(() => {
-                downloadGeneratedCode();
-            }, 1000);
-
-            // Show success message
-            document.querySelector('.success-animation').style.display = 'block';
-
-            setTimeout(() => {
-                // Redirect to home or refresh
-                window.location.reload();
-            }, 4000);
-        }
-
-        function downloadGeneratedCode() {
-            const zip = new JSZip();
-            zip.file("index.html", htmlEditor.getValue());
-            zip.file("style.css", cssEditor.getValue());
-            zip.file("script.js", jsEditor.getValue());
-            
-            zip.generateAsync({type:"blob"})
-            .then(content => {
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(content);
-                link.download = 'codigo-gerado.zip';
-                link.click();
-            });
-        }
-
-        // Inicializa a primeira aba
-        switchTab('html');
-    </script>
 </body>
 </html>
