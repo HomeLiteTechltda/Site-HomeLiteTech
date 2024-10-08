@@ -9,9 +9,9 @@
     <style>
         html {
             height: 100%;
-          }
-          
-          body {
+        }
+
+        body {
             height: 100%;
             padding: 3rem 0;
             margin: 0;
@@ -20,21 +20,20 @@
             font-family: Roboto, sans-serif;
             font-weight: bold;
             background-image: url(programmer-4k-wallpapers.jpg);
-            /* background-color: #333398; */
             overflow-x: hidden;
             background-position: center;
-              background-repeat: no-repeat;
-              background-size: cover;
-          }
-          
-          .signUpContainer {
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .signUpContainer {
             display: flex;
             align-items: center;
             justify-content: center;
             width: 100%;
-          }
-          
-          .formContainer {
+        }
+
+        .formContainer {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -42,109 +41,100 @@
             padding: 1rem 0rem;
             border-radius: 5px;
             width: 45%;
-            background-color:rgb(152, 151, 238);
-          }
-          
-          .formContainer>h1 {
+            background-color: rgb(60, 60, 60); /* Cinza escuro */
+        }
+
+        .formContainer>h1 {
             margin-bottom: 1rem;
             font-size: 30px;
             font-weight: bold;
-          }
-          
-          .img {
+            color: #d8b743; /* Dourado */
+        }
+
+        .img {
             width: 150px;
             height: 150px;
             border-radius: 50%;
             margin: 1rem 0;
             display: none;
-          }
-          
-          input {
+        }
+
+        input {
             border: none;
-            border: 2px solid #00000051;
+            border: 2px solid rgba(255, 255, 255, 0.3); /* Branco com opacidade */
             border-radius: 5px;
             padding: 0.7rem;
             margin: 0.5rem 0;
             width: 70%;
-          }
-          
-          input:focus {
+            background-color: #ffffff; /* Branco */
+            color: #333; /* Preto */
+        }
+
+        input:focus {
             outline: none;
-            border: 2px solid #333398;
+            border: 2px solid #d8b743; /* Dourado */
             transition: 0.5s;
-          }
-          
-          
-          .invalid {
+        }
+
+        .invalid {
             border: 2px solid #fe4a49;
             background-color: #fe494936;
             box-shadow: 0 0 0 30px #fe494936 inset;
-          }
-          
-          .submitInput {
+        }
+
+        .submitInput {
             width: 75%;
             padding: 0.8rem 2rem;
             border-radius: 7px;
             border: none;
-            background-color: #369833;
-            color: #a8ce1e;
+            background-color: #4a94f1; /* Azul claro */
+            color: #ffffff; /* Branco */
             margin: 1rem 0;
             cursor: pointer;
-          }
-          
-          .submitInput:hover {
-            background-color: #b0f807ef;
-          }
-          
-          .submitInput:disabled {
-            background-color: #f00f0f1f;
+        }
+
+        .submitInput:hover {
+            background-color: #d8b743; /* Dourado */
+        }
+
+        .submitInput:disabled {
+            background-color: #c2c2c2a7;
             color: #00000061;
-          }
-          
-          input::-webkit-outer-spin-button,
-          input::-webkit-inner-spin-button {
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
             -webkit-appearance: none;
             margin: 0;
-          }
-          
-          
-          /* .forgotPassword {
-            display: flex;
-            justify-content: end;
-            cursor: pointer;
-            width: 75%;
-            margin: 0.5rem 0;
-            font-size: 14px;
-            color: #333398;
-            text-decoration: underline;
-          } */
-          
-          .loginLink {
+        }
+
+        .loginLink {
             display: flex;
             align-items: center;
             font-size: 15px;
-            color: #333398;
-          }
-          
-          .loginLink a {
+            color: #d8b743; /* Dourado */
+        }
+
+        .loginLink a {
             cursor: pointer;
             text-decoration: underline;
             margin-left: 5px;
-          }
-          
-          .loginForm {
+            color: #ffffff; /* Branco */
+        }
+
+        .loginForm {
             display: none;
-          }
-          
-          .messageContainer {
+        }
+
+        .messageContainer {
             height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-          }
-          
-          .notificationContainer {
+        }
+
+        .notificationContainer {
             display: none;
             position: fixed;
             top: 3%;
@@ -154,71 +144,71 @@
             font-weight: normal;
             width: 20rem;
             background-color: #fff;
-          }
-          
-          .notificationContainer[error] {
+        }
+
+        .notificationContainer[error] {
             color: #ff0000;
-          }
-          
-          .notificationContainer[success] {
+        }
+
+        .notificationContainer[success] {
             color: #5cb85c;
-          }
-          
-          .showLogin {
+        }
+
+        .showLogin {
             animation: forwards 1s moveLoginToLeft;
-          }
-          
-          .hideLogin {
+        }
+
+        .hideLogin {
             animation: forwards 1s moveLoginToRight;
-          }
-          
-          .showSignUp {
+        }
+
+        .showSignUp {
             animation: forwards 1s moveSignUpToRight;
-          }
-          
-          .hideSignUp {
+        }
+
+        .hideSignUp {
             animation: forwards 1s moveSignUpToLeft;
-          }
-          
-          @keyframes moveLoginToLeft {
+        }
+
+        @keyframes moveLoginToLeft {
             from {
-              transform: translateX(200%);
+                transform: translateX(200%);
             }
-          
+
             to {
-              transform: translateX(-50%);
+                transform: translateX(-50%);
             }
-          }
-          
-          @keyframes moveLoginToRight {
+        }
+
+        @keyframes moveLoginToRight {
             from {
-              transform: translateX(-50%);
+                transform: translateX(-50%);
             }
-          
+
             to {
-              transform: translateX(200%);
+                transform: translateX(200%);
             }
-          }
-          
-          @keyframes moveSignUpToLeft {
+        }
+
+        @keyframes moveSignUpToLeft {
             0% {
-              transform: translateX(50%);
+                transform: translateX(50%);
             }
-          
+
             100% {
-              transform: translateX(-190%);
+                transform: translateX(-190%);
             }
-          }
-          
-          @keyframes moveSignUpToRight {
+        }
+
+        @keyframes moveSignUpToRight {
             0% {
-              transform: translateX(-190%);
+                transform: translateX(-190%);
             }
-          
+
             100% {
-              transform: translateX(50%);
+                transform: translateX(50%);
             }
-          }
+        }
     </style>
 </head>
 
@@ -226,13 +216,14 @@
     <div class="signUpContainer">
         <form onkeyup="signupButtonDisable()" class="formContainer" id="signUp">
             <h1>Criar conta</h1>
+            <p>Bem-Vindo a HomeLite Tech</p>
             <input id="signupEmail" type="text" placeholder="Email">
             <input id="signupName" type="text" placeholder="Nome">
             <input id="signupAge" type="number" placeholder="Idade">
             <input autocomplete="none" id="signupPassword" type="password" placeholder="Senha">
             <input autocomplete="none" id="signupConfirmPassword" type="password" placeholder="Confirmar Senha">
-            <input disabled class="submitInput" type="submit" id="signUpBtn"> 
-            
+            <input disabled class="submitInput" type="submit" id="signUpBtn">
+
             <span class="loginLink">
                 <p>Já possui uma conta ?</p>
                 <a onclick="changeForm('left')">login</a>
@@ -241,9 +232,10 @@
 
         <form onkeyup="loginButtonDisable()" class="formContainer loginForm" id="loginForm">
             <h1>Login</h1>
+            <p>Bem-Vindo a HomeLite Tech</p>
             <input id="loginEmail" type="text" placeholder="Email">
             <input autocomplete="none" id="loginPassword" type="password" placeholder="Senha">
-            <input disabled class="submitInput" type="submit" id="loginBtn">
+<!--esse botão precisa inserir um redirecionamento para a homw--><input disabled class="submitInput" type="submit" id="loginBtn">
 
             <span class="loginLink">
                 <p>Não possui conta ainda ?</p>
@@ -319,116 +311,21 @@ const changeForm = (direction) => {
   }
 };
 
-// Exibe as mensagens de erro/sucesso
-const messages = (message, status) => {
-  notification.removeAttribute("error");
-  notification.removeAttribute("success");
-
-  if (status === "error") {
-    notification.setAttribute("error", "");
-  } else if (status === "success") {
-    notification.setAttribute("success", "");
-  }
-
+// Notificação de erro ou sucesso
+const notify = (msg, isError) => {
   notification.style.display = "block";
-  notification.innerHTML = message;
-
+  notification.textContent = msg;
+  if (isError) {
+    notification.setAttribute("error", true);
+    notification.removeAttribute("success");
+  } else {
+    notification.setAttribute("success", true);
+    notification.removeAttribute("error");
+  }
   setTimeout(() => {
     notification.style.display = "none";
-  }, 3000);
+  }, 2000);
 };
 
-// Faz a validação dos inputs
-const formVerification = (user) => {
-  let error = false;
-  let errorNumber = 0;
-
-  if (!user.email.match(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i)) {
-    errorNumber = 1;
-  }
-
-  if (user.password != user.confirmPassword) {
-    errorNumber = 2;
-  } else if (user.password.length < 6) {
-    errorNumber = 3;
-  }
-
-  if (user.age >= 100 || user.age <= 0) {
-    errorNumber = 4;
-  }
-
-  switch (errorNumber) {
-    case 1:
-      messages("Email inválido", "error");
-      error = true;
-      break;
-
-    case 2:
-      messages("As senhas não estão iguais", "error");
-      error = true;
-      break;
-
-    case 3:
-      messages("Sua senha deve possuir ao menos 6 caracteres", "error");
-      error = true;
-      break;
-
-    case 4:
-      messages("Idade inválida", "error");
-      error = true;
-      break;
-
-    default:
-      error = false;
-      break;
-  }
-
-  return error;
-};
-
-// Realiza o cadastro
-signUpForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  const user = {
-    email: signupEmailInput.value,
-    name: signupNameInput.value,
-    age: signupAgeInput.value,
-    password: signupPasswordInput.value,
-    confirmPassword: signupConfirmPasswordInput.value,
-  };
-
-  if (formVerification(user) === false) {
-    delete user.confirmPassword;
-    localStorage['user'] = JSON.stringify(user);
-    messages('Usuário cadastrado com sucesso', 'success');
-    changeForm('left');
-  }
-});
-
-// Realiza o login
-loginForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  if (localStorage['user'] === undefined) {
-    messages('Você não possui Cadastro', 'error');
-    changeForm('right');
-  } else {
-    const user = JSON.parse(localStorage['user']);
-    const userLogin = {
-      email: loginEmailInput.value,
-      password: loginPasswordInput.value
-    };
-
-    if (userLogin.email === user.email && userLogin.password === user.password) {
-      messages("Login correto", "success");//
-      loginForm.reset();
-      loginButtonDisable();
-    } else {
-      messages("Usuário ou senha incorretos", "error");
-    }
-  }
-});
 </script>
-
 </html>

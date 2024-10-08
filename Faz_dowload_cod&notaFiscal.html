@@ -32,23 +32,45 @@
     <script>
         require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.38.0/min/vs' } });
         require(['vs/editor/editor.main'], function() {
-            // Inicialização do Monaco Editor
+
+            // Definindo o tema "Dracula"
+            monaco.editor.defineTheme('dracula', {
+                base: 'vs-dark', // baseado no tema escuro
+                inherit: true,   // herda configurações do tema padrão
+                rules: [
+                    { token: 'comment', foreground: '6272a4', fontStyle: 'italic' },
+                    { token: 'keyword', foreground: 'ff79c6' },
+                    { token: 'number', foreground: 'bd93f9' },
+                    { token: 'string', foreground: 'f1fa8c' },
+                    { token: 'variable', foreground: '50fa7b' }
+                ],
+                colors: {
+                    'editor.background': '#282a36',
+                    'editor.foreground': '#f8f8f2',
+                    'editor.selectionBackground': '#44475a',
+                    'editor.lineHighlightBackground': '#44475a',
+                    'editorCursor.foreground': '#f8f8f0',
+                    'editorWhitespace.foreground': '#3b3b3b'
+                }
+            });
+
+            // Inicialização do Monaco Editor com tema "Dracula"
             const htmlEditor = monaco.editor.create(document.getElementById('html-editor'), {
                 value: '<!-- Escreva seu HTML aqui -->',
                 language: 'html',
-                theme: 'vs-dark'
+                theme: 'dracula'
             });
 
             const cssEditor = monaco.editor.create(document.getElementById('css-editor'), {
                 value: '/* Escreva seu CSS aqui */',
                 language: 'css',
-                theme: 'vs-dark'
+                theme: 'dracula'
             });
 
             const jsEditor = monaco.editor.create(document.getElementById('js-editor'), {
                 value: '// Escreva seu JavaScript aqui',
                 language: 'javascript',
-                theme: 'vs-dark'
+                theme: 'dracula'
             });
 
             // Atualiza o iframe de preview
