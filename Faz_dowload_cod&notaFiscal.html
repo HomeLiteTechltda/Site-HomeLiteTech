@@ -76,6 +76,15 @@
                     });
 
                     document.getElementById(target).style.display = 'block';
+
+                    // Força o Monaco Editor a se reposicionar ao mudar de aba
+                    if (target === 'html-editor') {
+                        htmlEditor.layout();
+                    } else if (target === 'css-editor') {
+                        cssEditor.layout();
+                    } else if (target === 'js-editor') {
+                        jsEditor.layout();
+                    }
                 });
             });
 
