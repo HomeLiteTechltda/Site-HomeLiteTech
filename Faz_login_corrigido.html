@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de cadastro</title>
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            height: 100%;
+            padding: 3rem 0;
+            margin: 0;
+            display: grid;
+            place-items: center;
+            font-family: Roboto, sans-serif;
+            font-weight: bold;
+            background-image: url(programmer-4k-wallpapers.jpg);
+            overflow-x: hidden;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .signUpContainer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .formContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding: 1rem 0rem;
+            border-radius: 5px;
+            width: 45%;
+            background-color: rgb(152, 151, 238);
+        }
+
+        .formContainer>h1 {
+            margin-bottom: 1rem;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        input {
+            border: none;
+            border: 2px solid #00000051;
+            border-radius: 5px;
+            padding: 0.7rem;
+            margin: 0.5rem 0;
+            width: 70%;
+        }
+
+        input:focus {
+            outline: none;
+            border: 2px solid #333398;
+            transition: 0.5s;
+        }
+
+        .invalid {
+            border: 2px solid #fe4a49;
+            background-color: #fe494936;
+            box-shadow: 0 0 0 30px #fe494936 inset;
+        }
+
+        .submitInput {
+            width: 75%;
+            padding: 0.8rem 2rem;
+            border-radius: 7px;
+            border: none;
+            background-color: #369833;
+            color: #a8ce1e;
+            margin: 1rem 0;
+            cursor: pointer;
+        }
+
+        .submitInput:hover {
+            background-color: #b0f807ef;
+        }
+
+        .submitInput:disabled {
+            background-color: #f00f0f1f;
+            color: #00000061;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .loginLink {
+            display: flex;
+            align-items: center;
+            font-size: 15px;
+            color: #333398;
+        }
+
+        .loginLink a {
+            cursor: pointer;
+            text-decoration: underline;
+            margin-left: 5px;
+        }
+
+        .loginForm {
+            display: none;
+        }
+
+        .notificationContainer {
+            display: none;
+            position: fixed;
+            top: 3%;
+            right: 3%;
+            border-radius: 5px;
+            padding: 1rem;
+            font-weight: normal;
+            width: 20rem;
+            background-color: #fff;
+        }
+
+        .notificationContainer[error] {
+            color: #ff0000;
+        }
+
+        .notificationContainer[success] {
+            color: #5cb85c;
+        }
+
+        .showLogin {
+            animation: forwards 1s moveLoginToLeft;
+        }
+
+        .hideLogin {
+            animation: forwards 1s moveLoginToRight;
+        }
+
+        .showSignUp {
+            animation: forwards 1s moveSignUpToRight;
+        }
+
+        .hideSignUp {
+            animation: forwards 1s moveSignUpToLeft;
+        }
+
+        @keyframes moveLoginToLeft {
+            from {
+                transform: translateX(200%);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        @keyframes moveLoginToRight {
+            from {
+                transform: translateX(-50%);
+            }
+
+            to {
+                transform: translateX(200%);
+            }
+        }
+
+        @keyframes moveSignUpToLeft {
+            0% {
+                transform: translateX(50%);
+            }
+
+            100% {
+                transform: translateX(-190%);
+            }
+        }
+
+        @keyframes moveSignUpToRight {
+            0% {
+                transform: translateX(-190%);
+            }
+
+            100% {
+                transform: translateX(50%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="signUpContainer">
+        <form onkeyup="signupButtonDisable()" class="formContainer" id="signUp">
+            <h1>Criar conta</h1>
+            <input id="signupEmail" type="text" placeholder="Email">
+            <input id="signupName" type="text" placeholder="Nome">
+            <input id="signupAge" type="number" placeholder="Idade">
+            <input autocomplete="none" id="signupPassword" type="password" placeholder="Senha">
+            <input autocomplete="none" id="signupConfirmPassword" type="password" placeholder="Confirmar Senha">
+            <input disabled class="submitInput" type="submit" id="signUpBtn">
+            <span class="loginLink">
+                <p>Já possui uma conta ?</p>
+                <a onclick="changeForm('left')">login</a>
+            </span>
+        </form>
+
+        <form onkeyup="loginButtonDisable()" class="formContainer loginForm" id="loginForm">
+            <h1>Login</h1>
+            <input id="loginEmail" type="text" placeholder="Email">
+            <input autocomplete="none" id="loginPassword" type="password" placeholder="Senha">
+            <input disabled class="submitInput" type="submit" id="loginBtn">
+            <span class="loginLink">
+                <p>Não possui conta ainda ?</p>
+                <a onclick="changeForm('right')">Cadastrar</a>
+            </span>
+        </form>
+    </div>
+    <div class="notificationContainer"></div>
+
+    <script>
+        const signUpForm = document.querySelector("#signUp");
+        const signupNameInput = document.querySelector("#signupName");
+        const signupEmailInput = document.querySelector("#signupEmail");
+        const signupAgeInput = document.querySelector("#signupAge");
+        const signupPasswordInput = document.querySelector("#signupPassword");
+        const signupConfirmPasswordInput = document.querySelector("#signupConfirmPassword");
+        const signUpBtn = document.querySelector("#signUpBtn");
+
+        const loginForm = document.querySelector("#loginForm");
+        const loginEmailInput = document.querySelector("#loginEmail");
+        const loginPasswordInput = document.querySelector("#loginPassword");
+        const loginBtn = document.querySelector("#loginBtn");
+
+        const notification = document.querySelector(".notificationContainer");
+
+        const signupButtonDisable = () => {
+            if (
+                signupNameInput.value === "" ||
+                signupEmailInput.value === "" ||
+                signupAgeInput.value === "" ||
+                signupConfirmPasswordInput.value === "" ||
+                signupPasswordInput.value === ""
+            ) {
+                signUpBtn.setAttribute("disabled", true);
+            } else {
+                signUpBtn.removeAttribute("disabled");
+            }
+        };
+
+        const loginButtonDisable = () => {
+            if (loginEmailInput.value === "" || loginPasswordInput.value === "") {
+                loginBtn.setAttribute("disabled", true);
+            } else {
+                loginBtn.removeAttribute("disabled");
+            }
+        };
+
+        const changeForm = (direction) => {
+            if (direction === "left") {
+                loginForm.style.display = 'flex';
+                loginForm.classList.remove("hideLogin");
+                loginForm.classList.add("showLogin");
+                document.body.style.overflowY = 'hidden';
+                signUpForm.classList.remove("showSignUp");
+                signUpForm.classList.add("hideSignUp");
+                signUpForm.reset();
+                signupButtonDisable();
+            } else {
+                loginForm.classList.remove("showLogin");
+                loginForm.classList.add("hideLogin");
+                loginForm.reset();
+                loginButtonDisable();
+                document.body.style.overflowY = 'visible';
+                signUpForm.classList.remove("hideSignUp");
+                signUpForm.classList.add("showSignUp");
+            }
+        };
+
+        const messages = (message, status) => {
+            notification.removeAttribute("error");
+            notification.removeAttribute("success");
+
+            if (status === "error") {
+                notification.setAttribute("error", "");
+            } else if (status === "success") {
+                notification.setAttribute("success", "");
+            }
+
+            notification.style.display = "block";
+            notification.innerHTML = message;
+
+            setTimeout(() => {
+                notification.style.display = "none";
+            }, 3000);
+        };
+
+        const formVerification = (user) => {
+            let error = false;
+            let errorNumber = 0;
+
+            if (!user.email.match(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i)) {
+                errorNumber = 1;
+            }
+
+            if (user.password !== user.confirmPassword || user.password === "") {
+                errorNumber = 2;
+            }
+
+            if (parseInt(user.age) < 18) {
+                errorNumber = 3;
+            }
+
+            return { errorNumber };
+        };
+
+        signUpForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const newUser = {
+                email: signupEmailInput.value,
+                name: signupNameInput.value,
+                age: signupAgeInput.value,
+                password: signupPasswordInput.value,
+                confirmPassword: signupConfirmPasswordInput.value,
+            };
+
+            const result = formVerification(newUser);
+
+            if (result.errorNumber === 1) {
+                signupEmailInput.classList.add("invalid");
+                return messages("O email está inválido", "error");
+            }
+
+            signupEmailInput.classList.remove("invalid");
+
+            if (result.errorNumber === 2) {
+                signupPasswordInput.classList.add("invalid");
+                signupConfirmPasswordInput.classList.add("invalid");
+                return messages("As senhas não coincidem", "error");
+            }
+
+            signupPasswordInput.classList.remove("invalid");
+            signupConfirmPasswordInput.classList.remove("invalid");
+
+            if (result.errorNumber === 3) {
+                signupAgeInput.classList.add("invalid");
+                return messages("É preciso ter pelo menos 18 anos", "error");
+            }
+
+            signupAgeInput.classList.remove("invalid");
+
+            // Armazenar dados do usuário no localStorage
+            localStorage.setItem('user', JSON.stringify(newUser));
+
+            messages("Usuário cadastrado com sucesso", "success");
+
+            signUpForm.reset();
+            signupButtonDisable();
+        });
+
+        loginForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const loginUser = {
+                email: loginEmailInput.value,
+                password: loginPasswordInput.value,
+            };
+
+            // Recuperar dados do usuário do localStorage
+            const storedUser = JSON.parse(localStorage.getItem('user'));
+
+            if (!storedUser || storedUser.email !== loginUser.email || storedUser.password !== loginUser.password) {
+                return messages("Credenciais inválidas", "error");
+            }
+
+            messages("Login bem-sucedido", "success");
+
+            loginForm.reset();
+            loginButtonDisable();
+        });
+    </script>
+</body>
+
+</html>
