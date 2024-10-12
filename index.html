@@ -41,38 +41,27 @@
             padding: 1rem 0rem;
             border-radius: 5px;
             width: 45%;
-            background-color: rgb(60, 60, 60); /* Cinza escuro */
+            background-color: rgb(152, 151, 238);
         }
 
         .formContainer>h1 {
             margin-bottom: 1rem;
             font-size: 30px;
             font-weight: bold;
-            color: #d8b743; /* Dourado */
-        }
-
-        .img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin: 1rem 0;
-            display: none;
         }
 
         input {
             border: none;
-            border: 2px solid rgba(255, 255, 255, 0.3); /* Branco com opacidade */
+            border: 2px solid #00000051;
             border-radius: 5px;
             padding: 0.7rem;
             margin: 0.5rem 0;
             width: 70%;
-            background-color: #ffffff; /* Branco */
-            color: #333; /* Preto */
         }
 
         input:focus {
             outline: none;
-            border: 2px solid #d8b743; /* Dourado */
+            border: 2px solid #333398;
             transition: 0.5s;
         }
 
@@ -87,18 +76,18 @@
             padding: 0.8rem 2rem;
             border-radius: 7px;
             border: none;
-            background-color: #4a94f1; /* Azul claro */
-            color: #ffffff; /* Branco */
+            background-color: #369833;
+            color: #a8ce1e;
             margin: 1rem 0;
             cursor: pointer;
         }
 
         .submitInput:hover {
-            background-color: #d8b743; /* Dourado */
+            background-color: #b0f807ef;
         }
 
         .submitInput:disabled {
-            background-color: #c2c2c2a7;
+            background-color: #f00f0f1f;
             color: #00000061;
         }
 
@@ -112,26 +101,17 @@
             display: flex;
             align-items: center;
             font-size: 15px;
-            color: #d8b743; /* Dourado */
+            color: #333398;
         }
 
         .loginLink a {
             cursor: pointer;
             text-decoration: underline;
             margin-left: 5px;
-            color: #ffffff; /* Branco */
         }
 
         .loginForm {
             display: none;
-        }
-
-        .messageContainer {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
         }
 
         .notificationContainer {
@@ -216,115 +196,203 @@
     <div class="signUpContainer">
         <form onkeyup="signupButtonDisable()" class="formContainer" id="signUp">
             <h1>Criar conta</h1>
-            <p>Bem-Vindo a HomeLite Tech</p>
             <input id="signupEmail" type="text" placeholder="Email">
             <input id="signupName" type="text" placeholder="Nome">
             <input id="signupAge" type="number" placeholder="Idade">
             <input autocomplete="none" id="signupPassword" type="password" placeholder="Senha">
             <input autocomplete="none" id="signupConfirmPassword" type="password" placeholder="Confirmar Senha">
             <input disabled class="submitInput" type="submit" id="signUpBtn">
-
             <span class="loginLink">
                 <p>Já possui uma conta ?</p>
                 <a onclick="changeForm('left')">login</a>
             </span>
         </form>
 
-        <form onkeyup="loginButtonDisable()" class="formContainer loginForm" id="loginForm">
+        <form onsubmit="loginRedirect(event)" class="formContainer loginForm" id="loginForm">
             <h1>Login</h1>
-            <p>Bem-Vindo a HomeLite Tech</p>
             <input id="loginEmail" type="text" placeholder="Email">
             <input autocomplete="none" id="loginPassword" type="password" placeholder="Senha">
-            <button><input disabled class="submitInput" type="submit" id="loginBtn"></button>
+            <input class="submitInput" type="submit" id="loginBtn" value="Login">
             <span class="loginLink">
-                <p>Não possui conta ainda ?</p>
+                <p>Não possui conta ainda?</p>
                 <a onclick="changeForm('right')">Cadastrar</a>
             </span>
         </form>
     </div>
     <div class="notificationContainer"></div>
+
+    <script>
+        const signUpForm = document.querySelector("#signUp");
+        const signupNameInput = document.querySelector("#signupName");
+        const signupEmailInput = document.querySelector("#signupEmail");
+        const signupAgeInput = document.querySelector("#signupAge");
+        const signupPasswordInput = document.querySelector("#signupPassword");
+        const signupConfirmPasswordInput = document.querySelector("#signupConfirmPassword");
+        const signUpBtn = document.querySelector("#signUpBtn");
+
+        const loginForm = document.querySelector("#loginForm");
+        const loginEmailInput = document.querySelector("#loginEmail");
+        const loginPasswordInput = document.querySelector("#loginPassword");
+        const loginBtn = document.querySelector("#loginBtn");
+
+        const notification = document.querySelector(".notificationContainer");
+
+        const signupButtonDisable = () => {
+            if (
+                signupNameInput.value === "" ||
+                signupEmailInput.value === "" ||
+                signupAgeInput.value === "" ||
+                signupConfirmPasswordInput.value === "" ||
+                signupPasswordInput.value === ""
+            ) {
+                signUpBtn.setAttribute("disabled", true);
+            } else {
+                signUpBtn.removeAttribute("disabled");
+            }
+        };
+
+        const loginButtonDisable = () => {
+            if (loginEmailInput.value === "" || loginPasswordInput.value === "") {
+                loginBtn.setAttribute("disabled", true);
+            } else {
+                loginBtn.removeAttribute("disabled");
+            }
+        };
+
+        const changeForm = (direction) => {
+            if (direction === "left") {
+                loginForm.style.display = 'flex';
+                loginForm.classList.remove("hideLogin");
+                loginForm.classList.add("showLogin");
+                document.body.style.overflowY = 'hidden';
+                signUpForm.classList.remove("showSignUp");
+                signUpForm.classList.add("hideSignUp");
+                signUpForm.reset();
+                signupButtonDisable();
+            } else {
+                loginForm.classList.remove("showLogin");
+                loginForm.classList.add("hideLogin");
+                loginForm.reset();
+                loginButtonDisable();
+                document.body.style.overflowY = 'visible';
+                signUpForm.classList.remove("hideSignUp");
+                signUpForm.classList.add("showSignUp");
+            }
+        };
+
+        const messages = (message, status) => {
+            notification.removeAttribute("error");
+            notification.removeAttribute("success");
+
+            if (status === "error") {
+                notification.setAttribute("error", "");
+            } else if (status === "success") {
+                notification.setAttribute("success", "");
+            }
+
+            notification.style.display = "block";
+            notification.innerHTML = message;
+
+            setTimeout(() => {
+                notification.style.display = "none";
+            }, 3000);
+        };
+
+        const formVerification = (user) => {
+            let error = false;
+            let errorNumber = 0;
+
+            if (!user.email.match(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i)) {
+                errorNumber = 1;
+            }
+
+            if (user.password !== user.confirmPassword || user.password === "") {
+                errorNumber = 2;
+            }
+
+            if (parseInt(user.age) < 18) {
+                errorNumber = 3;
+            }
+
+            return { errorNumber };
+        };
+
+        signUpForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const newUser = {
+                email: signupEmailInput.value,
+                name: signupNameInput.value,
+                age: signupAgeInput.value,
+                password: signupPasswordInput.value,
+                confirmPassword: signupConfirmPasswordInput.value,
+            };
+
+            const result = formVerification(newUser);
+
+            if (result.errorNumber === 1) {
+                signupEmailInput.classList.add("invalid");
+                return messages("O email está inválido", "error");
+            }
+
+            signupEmailInput.classList.remove("invalid");
+
+            if (result.errorNumber === 2) {
+                signupPasswordInput.classList.add("invalid");
+                signupConfirmPasswordInput.classList.add("invalid");
+                return messages("As senhas não coincidem", "error");
+            }
+
+            signupPasswordInput.classList.remove("invalid");
+            signupConfirmPasswordInput.classList.remove("invalid");
+
+            if (result.errorNumber === 3) {
+                signupAgeInput.classList.add("invalid");
+                return messages("É preciso ter pelo menos 18 anos", "error");
+            }
+
+            signupAgeInput.classList.remove("invalid");
+
+            // Armazenar dados do usuário no localStorage
+            localStorage.setItem('user', JSON.stringify(newUser));
+
+            messages("Usuário cadastrado com sucesso", "success");
+
+            signUpForm.reset();
+            signupButtonDisable();
+
+            // Redirecionar para a tela de login
+            setTimeout(() => {
+                changeForm('left');
+            }, 1000);
+        });
+
+        loginForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const loginUser = {
+                email: loginEmailInput.value,
+                password: loginPasswordInput.value,
+            };
+
+            // Recuperar dados do usuário do localStorage
+            const storedUser = JSON.parse(localStorage.getItem('user'));
+
+            if (!storedUser || storedUser.email !== loginUser.email || storedUser.password !== loginUser.password) {
+                return messages("Credenciais inválidas", "error");
+            }
+
+            messages("Login bem-sucedido", "success");
+
+            loginForm.reset();
+            loginButtonDisable();
+
+            // Redirecionar para a página Home.html
+            setTimeout(() => {
+                window.location.href = "Home.html";
+            }, 1000);
+        });
+    </script>
 </body>
 
-<script>
-// Campos do formulário de cadastro
-const signUpForm = document.querySelector("#signUp");
-const signupNameInput = document.querySelector("#signupName");
-const signupEmailInput = document.querySelector("#signupEmail");
-const signupAgeInput = document.querySelector("#signupAge");
-const signupPasswordInput = document.querySelector("#signupPassword");
-const signupConfirmPasswordInput = document.querySelector("#signupConfirmPassword");
-const signUpBtn = document.querySelector("#signUpBtn");
-
-// Campos do formulário de login
-const loginForm = document.querySelector("#loginForm");
-const loginEmailInput = document.querySelector("#loginEmail");
-const loginPasswordInput = document.querySelector("#loginPassword");
-const loginBtn = document.querySelector("#loginBtn");
-
-// Outros
-const notification = document.querySelector(".notificationContainer");
-
-// Verifica se todos os campos do cadastro estão preenchidos e habilita e desabilita o botão 
-const signupButtonDisable = () => {
-  if (
-    signupNameInput.value === "" ||
-    signupEmailInput.value === "" ||
-    signupAgeInput.value === "" ||
-    signupConfirmPasswordInput.value === "" ||
-    signupPasswordInput.value === ""
-  ) {
-    signUpBtn.setAttribute("disabled", true);
-  } else {
-    signUpBtn.removeAttribute("disabled");
-  }
-};
-
-// Verifica se todos os campos do login estão preenchidos e habilita e desabilita o botão
-const loginButtonDisable = () => {
-    if (loginEmailInput.value === "" || loginPasswordInput.value === "") {
-      loginBtn.setAttribute("disabled", true);
-    } else {
-      loginBtn.removeAttribute("disabled");
-    }
-  };
-
-// Altera entre o formulario de cadastro e login
-const changeForm = (direction) => {
-  if (direction === "left") {
-    loginForm.style.display = 'flex';
-    loginForm.classList.remove("hideLogin");
-    loginForm.classList.add("showLogin");
-    document.body.style.overflowY = 'hidden';
-    signUpForm.classList.remove("showSignUp");
-    signUpForm.classList.add("hideSignUp");
-    signUpForm.reset();
-    signupButtonDisable();
-  } else {
-    loginForm.classList.remove("showLogin");
-    loginForm.classList.add("hideLogin");
-    loginForm.reset();
-    loginButtonDisable();
-    document.body.style.overflowY = 'visible';
-    signUpForm.classList.remove("hideSignUp");
-    signUpForm.classList.add("showSignUp");
-  }
-};
-
-// Notificação de erro ou sucesso
-const notify = (msg, isError) => {
-  notification.style.display = "block";
-  notification.textContent = msg;
-  if (isError) {
-    notification.setAttribute("error", true);
-    notification.removeAttribute("success");
-  } else {
-    notification.setAttribute("success", true);
-    notification.removeAttribute("error");
-  }
-  setTimeout(() => {
-    notification.style.display = "none";
-  }, 2000);
-};
-
-</script>
 </html>
