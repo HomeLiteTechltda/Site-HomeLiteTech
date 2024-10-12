@@ -1,205 +1,330 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <title>Home Lite Tech</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de cadastro</title>
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            height: 100%;
+            padding: 3rem 0;
+            margin: 0;
+            display: grid;
+            place-items: center;
+            font-family: Roboto, sans-serif;
+            font-weight: bold;
+            background-image: url(programmer-4k-wallpapers.jpg);
+            overflow-x: hidden;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .signUpContainer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .formContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding: 1rem 0rem;
+            border-radius: 5px;
+            width: 45%;
+            background-color: rgb(60, 60, 60); /* Cinza escuro */
+        }
+
+        .formContainer>h1 {
+            margin-bottom: 1rem;
+            font-size: 30px;
+            font-weight: bold;
+            color: #d8b743; /* Dourado */
+        }
+
+        .img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 1rem 0;
+            display: none;
+        }
+
+        input {
+            border: none;
+            border: 2px solid rgba(255, 255, 255, 0.3); /* Branco com opacidade */
+            border-radius: 5px;
+            padding: 0.7rem;
+            margin: 0.5rem 0;
+            width: 70%;
+            background-color: #ffffff; /* Branco */
+            color: #333; /* Preto */
+        }
+
+        input:focus {
+            outline: none;
+            border: 2px solid #d8b743; /* Dourado */
+            transition: 0.5s;
+        }
+
+        .invalid {
+            border: 2px solid #fe4a49;
+            background-color: #fe494936;
+            box-shadow: 0 0 0 30px #fe494936 inset;
+        }
+
+        .submitInput {
+            width: 75%;
+            padding: 0.8rem 2rem;
+            border-radius: 7px;
+            border: none;
+            background-color: #4a94f1; /* Azul claro */
+            color: #ffffff; /* Branco */
+            margin: 1rem 0;
+            cursor: pointer;
+        }
+
+        .submitInput:hover {
+            background-color: #d8b743; /* Dourado */
+        }
+
+        .submitInput:disabled {
+            background-color: #c2c2c2a7;
+            color: #00000061;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .loginLink {
+            display: flex;
+            align-items: center;
+            font-size: 15px;
+            color: #d8b743; /* Dourado */
+        }
+
+        .loginLink a {
+            cursor: pointer;
+            text-decoration: underline;
+            margin-left: 5px;
+            color: #ffffff; /* Branco */
+        }
+
+        .loginForm {
+            display: none;
+        }
+
+        .messageContainer {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .notificationContainer {
+            display: none;
+            position: fixed;
+            top: 3%;
+            right: 3%;
+            border-radius: 5px;
+            padding: 1rem;
+            font-weight: normal;
+            width: 20rem;
+            background-color: #fff;
+        }
+
+        .notificationContainer[error] {
+            color: #ff0000;
+        }
+
+        .notificationContainer[success] {
+            color: #5cb85c;
+        }
+
+        .showLogin {
+            animation: forwards 1s moveLoginToLeft;
+        }
+
+        .hideLogin {
+            animation: forwards 1s moveLoginToRight;
+        }
+
+        .showSignUp {
+            animation: forwards 1s moveSignUpToRight;
+        }
+
+        .hideSignUp {
+            animation: forwards 1s moveSignUpToLeft;
+        }
+
+        @keyframes moveLoginToLeft {
+            from {
+                transform: translateX(200%);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        @keyframes moveLoginToRight {
+            from {
+                transform: translateX(-50%);
+            }
+
+            to {
+                transform: translateX(200%);
+            }
+        }
+
+        @keyframes moveSignUpToLeft {
+            0% {
+                transform: translateX(50%);
+            }
+
+            100% {
+                transform: translateX(-190%);
+            }
+        }
+
+        @keyframes moveSignUpToRight {
+            0% {
+                transform: translateX(-190%);
+            }
+
+            100% {
+                transform: translateX(50%);
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <header>
-    <div id="menu">
-      <div id="logo">
-        <img src="logo.png" alt="Logo"> 
-      </div>
-      <a href="index.html">Home</a>
-      <a href="#middle">Sobre Nós</a>
-      <a href=".footer-section">Contato</a>
-      <a href="Faz_dowload_cod&notaFiscal.html">Crie o Seu Site</a>
-      <input type="search" placeholder="Pesquise Aqui">
-    </div>
-  </header>
+    <div class="signUpContainer">
+        <form onkeyup="signupButtonDisable()" class="formContainer" id="signUp">
+            <h1>Criar conta</h1>
+            <p>Bem-Vindo a HomeLite Tech</p>
+            <input id="signupEmail" type="text" placeholder="Email">
+            <input id="signupName" type="text" placeholder="Nome">
+            <input id="signupAge" type="number" placeholder="Idade">
+            <input autocomplete="none" id="signupPassword" type="password" placeholder="Senha">
+            <input autocomplete="none" id="signupConfirmPassword" type="password" placeholder="Confirmar Senha">
+            <input disabled class="submitInput" type="submit" id="signUpBtn">
 
-  <section id="beginning">
-    <img src="https://c0.wallpaperflare.com/preview/492/652/36/lines-of-html-codes.jpg" alt="Codes" id="background-image">
-    <h2>Bem-Vindo à HomeLite Tech, a sua empresa de desenvolvimento de sites.</h2>
-  </section>
+            <span class="loginLink">
+                <p>Já possui uma conta ?</p>
+                <a onclick="changeForm('left')">login</a>
+            </span>
+        </form>
 
-  <section id="middle">
-    <div class="container">
-      <div class="title">
-        <h2>Nós somos <span>ESPECIALISTAS</span></h2>
-        <p>Construindo relações duradouras.</p>
-        <p>Buscamos criar relações de longo prazo com nossos clientes por que entendemos que os projetos são organismos vivos que precisam passar por constante evolução para atender à necessidade do consumidor.</p>
-      </div>
-  
-      <div class="grid">
-        <div class="grid-item">
-          <h3>Planejamento</h3>
-          <p>Acreditamos no planejamento de ações tanto no pré-projeto quanto no pós-projeto para aumentar a eficiência das ações de tecnologia.</p>
-        </div>
-        <div class="grid-item">
-          <h3>APPS que são um sucesso!</h3>
-          <p>Nossos APPs já são utilizados por milhares de clientes todos os dias. Contamos com um time especialista no assunto para implantar uma solução robusta e confiável.</p>
-        </div>
-        <div class="grid-item">
-          <h3>Omnichannel de verdade</h3>
-          <p>O cliente é único e precisa ser atendido com excelência em todos os canais, seja no APP, site ou WhatsApp, ajudamos sua empresa a encantar os clientes.</p>
-        </div>
-        <div class="grid-item">
-          <h3>Integração de sistemas</h3>
-          <p>Integração entre sistemas de pagamento, nota fiscal eletrônica, PDV, análise de risco e logística, realizadas por nossa equipe diariamente.</p>
-        </div>
-        <div class="grid-item">
-          <h3>Consultoria e Outsourcing</h3>
-          <p>Mantenha o foco no seu negócio e deixe a TI com a gente. Nossa equipe cuidará das necessidades de tecnologia da sua empresa.</p>
-        </div>
-      </div>
+        <form onkeyup="loginButtonDisable()" class="formContainer loginForm" id="loginForm">
+            <h1>Login</h1>
+            <p>Bem-Vindo a HomeLite Tech</p>
+            <input id="loginEmail" type="text" placeholder="Email">
+            <input autocomplete="none" id="loginPassword" type="password" placeholder="Senha">
+            <button><input disabled class="submitInput" type="submit" id="loginBtn"></button>
+            <span class="loginLink">
+                <p>Não possui conta ainda ?</p>
+                <a onclick="changeForm('right')">Cadastrar</a>
+            </span>
+        </form>
     </div>
-  </section>
-<hr>
-  <section id="services">
-    <div class="container">
-      <h2>O Que Fazemos?</h2>
-      </div>
-      <div class="grid">
-        <div class="grid-item">
-          <h3>Pré-projeto</h3>
-          <p>Nosso time de análise irá realizar o planejamento funcional da sua aplicação pensando em cada ponto da arquitetura de acordo com o volume esperado, criando uma solução escalável no longo prazo.</p>
-        </div>
-        <div class="grid-item">
-          <h3>Arquitetura de Sistemas</h3>
-          <p>Micro-serviços? Lambda? NoSql, as armas são muitas, mas elas precisam ser utilizadas de acordo com a necessidade do negócio, buscando a melhor relação de custo benefício.</p>
-        </div>
-        <div class="grid-item">
-          <h3>UX / UI</h3>
-          <p>Nossa equipe vai pensar em como deixar o usuário do seu aplicativo satisfeito em cada passo da experiência com o seu aplicativo, site ou sistema.</p>
-        </div>
-        <div class="grid-item">
-          <h3>Implementação</h3>
-          <p>Código está em nosso nome e em nosso DNA quando o assunto é programação. Pode contar com a nossa equipe para criar a solução ideal para o seu negócio.</p>
-        </div>
-        <div class="grid-item">
-          <h3>Customização total</h3>
-          <p>Sistemas flexíveis e, ao mesmo tempo, robustos e customizáveis, porque acreditamos que seu negócio é único e precisa de velocidade para responder às mudanças do mercado.</p>
-        </div>
-        <div class="grid-item">
-          <h3>APIs e Webservices</h3>
-          <p>Acreditamos que juntos podemos mais. Por isso, nossos sistemas são integrados às melhores soluções de mercado nos mais diversos segmentos. Essa é a economia baseada em APIs.</p>
-        </div>
-        <div class="grid-item">
-          <h3>Consultoria</h3>
-          <p>Queremos estar ao seu lado e viver o dia a dia do seu negócio. Por isso, você conta sempre com um atendimento consultivo que busca as soluções mais efetivas para o seu negócio.</p>
-        </div>
-        <div class="grid-item">
-          <h3>Segurança e Privacidade</h3>
-          <p>Levamos muito a sério a segurança dos usuários das nossas aplicações. Você conta com uma equipe sempre vigilante em questões de segurança e proteção de dados.</p>
-        </div>
-        <div class="grid-item">
-          <h3>Meios de pagamento</h3>
-          <p>Nossas soluções são integradas às maiores soluções de pagamento e BAAS do mercado brasileiro para que você tenha total tranquilidade no recebimento de suas transações.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <hr>
-  <footer class="footer-section">
-    <div class="container">
-        <div class="footer-cta pt-5 pb-5">
-            <div class="row">
-                <div class="col-md-4 mb-30">
-                    <div class="single-cta">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div class="cta-text">
-                            <h4>Encontre a gente</h4>
-                            <span>1010 Avenue, SW 54321, Chandigarh</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-30">
-                    <div class="single-cta">
-                        <i class="far fa-envelope-open"></i>
-                        <div class="cta-text">
-                            <h4>Mande um email</h4>
-                            <span><a href="mailto:homelitetechltda@gmail.com">homelitetechltda@gmail.com</a></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-content">
-            <div class="row">
-                <div class="col-md-4 mb-50">
-                    <div class="footer-widget">
-                        <div class="footer-logo">
-                            <a href="#"><img src="logo.png" class="img-fluid" alt="logo"></a>
-                        </div>
-                        <div class="footer-text">
-                            <p></p>
-                        </div>
-                        <div class="footer-social-icon">
-                            <span>Follow us</span>
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-google-plus-g"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-30">
-                    <div class="footer-widget">
-                        <h3>Links Uteis</h3>
-                        <ul id="footer">
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="#middle">Sobre</a></li>
-                            <li><a href="#services">Serviços</a></li>
-                            <li><a href="#">Contato</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-50">
-                    <div class="footer-widget">
-                        <h3>Inscreva-se</h3>
-                        <p>Não Perca as Novidades, Inscreva-se já</p>
-                        <div class="subscribe-form">
-                            <form action="#">
-                                <input type="text" placeholder="Endereço de email">
-                                <button><i class="fab fa-telegram-plane"></i></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="copyright-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 text-center text-md-left">
-                    <div class="copyright-text">
-                        <p>Copyright &copy; 2024, Todos os direitos reservados a <a href="#">HomeLite Tech</a></p>
-                    </div>
-                </div>
-                <div class="col-md-6 text-center text-md-right">
-                    <div class="footer-menu">
-                        <ul id="footer">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Termos</a></li>
-                            <li><a href="#">Privacidade</a></li>
-                            <li><a href="#">Contato</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-<script src="https://kit.fontawesome.com/9013f23215.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script src="main.js"></script>
+    <div class="notificationContainer"></div>
 </body>
+
+<script>
+// Campos do formulário de cadastro
+const signUpForm = document.querySelector("#signUp");
+const signupNameInput = document.querySelector("#signupName");
+const signupEmailInput = document.querySelector("#signupEmail");
+const signupAgeInput = document.querySelector("#signupAge");
+const signupPasswordInput = document.querySelector("#signupPassword");
+const signupConfirmPasswordInput = document.querySelector("#signupConfirmPassword");
+const signUpBtn = document.querySelector("#signUpBtn");
+
+// Campos do formulário de login
+const loginForm = document.querySelector("#loginForm");
+const loginEmailInput = document.querySelector("#loginEmail");
+const loginPasswordInput = document.querySelector("#loginPassword");
+const loginBtn = document.querySelector("#loginBtn");
+
+// Outros
+const notification = document.querySelector(".notificationContainer");
+
+// Verifica se todos os campos do cadastro estão preenchidos e habilita e desabilita o botão 
+const signupButtonDisable = () => {
+  if (
+    signupNameInput.value === "" ||
+    signupEmailInput.value === "" ||
+    signupAgeInput.value === "" ||
+    signupConfirmPasswordInput.value === "" ||
+    signupPasswordInput.value === ""
+  ) {
+    signUpBtn.setAttribute("disabled", true);
+  } else {
+    signUpBtn.removeAttribute("disabled");
+  }
+};
+
+// Verifica se todos os campos do login estão preenchidos e habilita e desabilita o botão
+const loginButtonDisable = () => {
+    if (loginEmailInput.value === "" || loginPasswordInput.value === "") {
+      loginBtn.setAttribute("disabled", true);
+    } else {
+      loginBtn.removeAttribute("disabled");
+    }
+  };
+
+// Altera entre o formulario de cadastro e login
+const changeForm = (direction) => {
+  if (direction === "left") {
+    loginForm.style.display = 'flex';
+    loginForm.classList.remove("hideLogin");
+    loginForm.classList.add("showLogin");
+    document.body.style.overflowY = 'hidden';
+    signUpForm.classList.remove("showSignUp");
+    signUpForm.classList.add("hideSignUp");
+    signUpForm.reset();
+    signupButtonDisable();
+  } else {
+    loginForm.classList.remove("showLogin");
+    loginForm.classList.add("hideLogin");
+    loginForm.reset();
+    loginButtonDisable();
+    document.body.style.overflowY = 'visible';
+    signUpForm.classList.remove("hideSignUp");
+    signUpForm.classList.add("showSignUp");
+  }
+};
+
+// Notificação de erro ou sucesso
+const notify = (msg, isError) => {
+  notification.style.display = "block";
+  notification.textContent = msg;
+  if (isError) {
+    notification.setAttribute("error", true);
+    notification.removeAttribute("success");
+  } else {
+    notification.setAttribute("success", true);
+    notification.removeAttribute("error");
+  }
+  setTimeout(() => {
+    notification.style.display = "none";
+  }, 2000);
+};
+
+</script>
 </html>
