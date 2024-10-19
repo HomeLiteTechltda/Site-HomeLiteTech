@@ -7,6 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tela de cadastro</title>
     <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         html {
             height: 100%;
         }
@@ -19,11 +25,24 @@
             place-items: center;
             font-family: Roboto, sans-serif;
             font-weight: bold;
-            background-image: url(programmer-4k-wallpapers.jpg);
+            position: relative; /* Necessário para o ::before funcionar corretamente */
             overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('programmer-4k-wallpapers.jpg');
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
+            z-index: -1; /* Fica atrás do conteúdo */
+            filter: brightness(15%); /* Aplica o efeito de escurecimento */
+            opacity: 0.9; /* Controla a opacidade */
         }
 
         .signUpContainer {
@@ -34,25 +53,29 @@
         }
 
         .formContainer {
+            z-index: 1; /* Garante que o formulário apareça sobre a imagem */
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 100%;
             padding: 1rem 0rem;
-            border-radius: 5px;
+            border-radius: 15px;
             width: 45%;
-            background-color: rgb(152, 151, 238);
+            background: rgba(0, 0, 0, 0.1); /* Transparência */
+            backdrop-filter: blur(10px); /* Desfoque */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25); /* Sombra suave */
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Borda leve */
         }
 
         .formContainer>h1 {
             margin-bottom: 1rem;
             font-size: 30px;
             font-weight: bold;
+            color: #c79a53;
         }
 
         input {
             border: none;
-            border: 2px solid #00000051;
+            border: 2px solid #c79a53;
             border-radius: 5px;
             padding: 0.7rem;
             margin: 0.5rem 0;
@@ -67,8 +90,8 @@
 
         .invalid {
             border: 2px solid #fe4a49;
-            background-color: #fe494936;
-            box-shadow: 0 0 0 30px #fe494936 inset;
+            background-color: #74171736;
+            box-shadow: 0 0 0 30px #74171736 inset;
         }
 
         .submitInput {
@@ -76,19 +99,19 @@
             padding: 0.8rem 2rem;
             border-radius: 7px;
             border: none;
-            background-color: #369833;
-            color: #a8ce1e;
+            background-color: #c79a53;
+            color: #000000;
             margin: 1rem 0;
             cursor: pointer;
         }
 
         .submitInput:hover {
-            background-color: #b0f807ef;
+            background-color: #c79a53a8;
         }
 
         .submitInput:disabled {
-            background-color: #f00f0f1f;
-            color: #00000061;
+            background-color: #c79a53;
+            color: #000000;
         }
 
         input::-webkit-outer-spin-button,
@@ -101,7 +124,7 @@
             display: flex;
             align-items: center;
             font-size: 15px;
-            color: #333398;
+            color: #ffffff;
         }
 
         .loginLink a {
@@ -198,7 +221,6 @@
             <h1>Criar conta</h1>
             <input id="signupEmail" type="text" placeholder="Email">
             <input id="signupName" type="text" placeholder="Nome">
-            <input id="signupAge" type="number" placeholder="Idade">
             <input autocomplete="none" id="signupPassword" type="password" placeholder="Senha">
             <input autocomplete="none" id="signupConfirmPassword" type="password" placeholder="Confirmar Senha">
             <input disabled class="submitInput" type="submit" id="signUpBtn">
