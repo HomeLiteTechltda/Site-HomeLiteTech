@@ -4,6 +4,8 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+
 body {
   font-family: 'Teko', sans-serif;
   margin: 0;
@@ -153,11 +155,7 @@ h2 {
 }
 
 hr {
-  border: none;
-  height: 4px;
-  background: linear-gradient(to right, #c79a53, #806a3e); /* Degradê em tons de dourado */
-  border-radius: 5px;
-  margin: 40px 0;
+  background: linear-gradient(to right, #c79a53, #e0dfd5); /* Dourado suave para bege */
 }
 
 #footer ul {
