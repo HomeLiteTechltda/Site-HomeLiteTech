@@ -247,7 +247,6 @@
         const signUpForm = document.querySelector("#signUp");
         const signupNameInput = document.querySelector("#signupName");
         const signupEmailInput = document.querySelector("#signupEmail");
-        const signupAgeInput = document.querySelector("#signupAge");
         const signupPasswordInput = document.querySelector("#signupPassword");
         const signupConfirmPasswordInput = document.querySelector("#signupConfirmPassword");
         const signUpBtn = document.querySelector("#signUpBtn");
@@ -263,7 +262,7 @@
             if (
                 signupNameInput.value === "" ||
                 signupEmailInput.value === "" ||
-                signupAgeInput.value === "" ||
+
                 signupConfirmPasswordInput.value === "" ||
                 signupPasswordInput.value === ""
             ) {
@@ -332,10 +331,6 @@
                 errorNumber = 2;
             }
 
-            if (parseInt(user.age) < 18) {
-                errorNumber = 3;
-            }
-
             return { errorNumber };
         };
 
@@ -345,7 +340,6 @@
             const newUser = {
                 email: signupEmailInput.value,
                 name: signupNameInput.value,
-                age: signupAgeInput.value,
                 password: signupPasswordInput.value,
                 confirmPassword: signupConfirmPasswordInput.value,
             };
@@ -368,12 +362,6 @@
             signupPasswordInput.classList.remove("invalid");
             signupConfirmPasswordInput.classList.remove("invalid");
 
-            if (result.errorNumber === 3) {
-                signupAgeInput.classList.add("invalid");
-                return messages("É preciso ter pelo menos 18 anos", "error");
-            }
-
-            signupAgeInput.classList.remove("invalid");
 
             // Armazenar dados do usuário no localStorage
             localStorage.setItem('user', JSON.stringify(newUser));

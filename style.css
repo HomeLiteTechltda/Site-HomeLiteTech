@@ -37,6 +37,10 @@ header {
   transition: all 0.3s ease;
 }
 
+#menu a:hover {
+  color: #c79a53; /* Dourado escuro */
+}
+
 #menu input {
   margin-left: auto;
 }
