@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -7,22 +7,33 @@
     <title>Política de Privacidade</title>
     <style>
         body {
-            font-family: Roboto, sans-serif;
+            font-family: 'Roboto', sans-serif;
             background-color: #222; /* Fundo escuro */
             color: #d3d3d3; /* Texto claro */
             margin: 0;
             padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Preenche toda a altura da tela */
+            overflow-x: hidden; /* Evita overflow horizontal */
         }
 
         h1 {
-            font-size: 36px;
+            font-size: 2.5rem; /* Usando rem para maior responsividade */
             color: #c79a53; /* Dourado elegante */
             text-align: center;
             margin-bottom: 2rem;
         }
 
+        h2 {
+            font-size: 2rem; /* Usando rem para maior responsividade */
+            margin-top: 2rem; /* Espaçamento superior */
+            margin-bottom: 1rem; /* Espaçamento inferior */
+        }
+
         p {
-            font-size: 18px;
+            font-size: 1.125rem; /* Usando rem para maior responsividade */
             line-height: 1.6;
             margin-bottom: 1.5rem;
         }
@@ -39,11 +50,27 @@
 
         .container {
             max-width: 900px;
+            width: 90%; /* Largura adaptativa em dispositivos pequenos */
             margin: 0 auto;
             padding: 2rem;
             background-color: rgba(0, 0, 0, 0.8); /* Fundo translúcido */
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Responsividade */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem; /* Reduz o tamanho do título em telas pequenas */
+            }
+
+            h2 {
+                font-size: 1.5rem; /* Reduz o tamanho dos subtítulos em telas pequenas */
+            }
+
+            p {
+                font-size: 1rem; /* Reduz o tamanho da fonte dos parágrafos em telas pequenas */
+            }
         }
     </style>
 </head>

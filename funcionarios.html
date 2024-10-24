@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Funcionários</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        * { 
+            font-family: 'Teko', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-weight: normal;
+            font-style: normal;
+            background-color: #1c1c1c; /* Cinza escuro */
+            color: #e0dfd5; /* Bege claro */
+        }
+
+        nav {
+            background-color: #2b2b2b; /* Cinza escuro */
+        }
+
+        .navbar-brand img {
+            width: 250px; /* Ajuste o tamanho aqui */
+            height: auto; /* Altura automática para manter a proporção */
+        }
+
+        .nav-link {
+            font-size: 1.2rem; /* Tamanho da fonte aumentado */
+            color: #e0dfd5;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #c79a53; /* Dourado escuro */
+        }
+
+        h2 {
+            font-size: 2.5rem; /* Tamanho da fonte aumentado */
+            color: #c79a53; /* Dourado escuro */
+            margin-bottom: 40px;
+        }
+
+        table {
+            font-size: 1.1rem; /* Tamanho da fonte aumentado */
+        }
+
+        th, td {
+            padding: 15px; /* Espaçamento das células */
+        }
+
+        .status-disponivel {
+            color: green;
+        }
+        .status-ocupado {
+            color: red;
+        }
+
+        .list-group-item {
+            background-color: #2b2b2b; /* Cinza médio escuro */
+            color: #e0dfd5; /* Bege claro */
+            border: none; /* Remover borda */
+        }
+        
+        .list-group-item:hover {
+            background-color: #3c3c3c; /* Cinza forte para efeito hover */
+        }
+        
+        footer {
+            background-color: #141414; /* Preto elegante */
+            color: #e0dfd5; /* Bege claro */
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 2rem; /* Tamanho menor para telas pequenas */
+            }
+            .nav-link {
+                font-size: 1rem; /* Tamanho menor para links de navegação */
+            }
+            table {
+                font-size: 0.9rem; /* Tamanho menor para tabelas */
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="Index.html">
+                <img src="logo.png" alt="Logo da Empresa">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#funcionarios">Funcionários</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#chamados">Chamados</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#clientes">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Sair</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5" id="funcionarios">
+        <h2 class="mb-4">Funcionários Disponíveis</h2>
+        <div class="table-responsive"> <!-- Container responsivo para a tabela -->
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Função</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Luis</td>
+                        <td>Dev / Gerente</td>
+                        <td id="status-luis" class="status-disponivel">Disponível</td>
+                    </tr>
+                    <tr>
+                        <td>Eduardo</td>
+                        <td>Marketing Digital</td>
+                        <td id="status-eduardo" class="status-disponivel">Disponível</td>
+                    </tr>
+                    <tr>
+                        <td>Gean</td>
+                        <td>Dev</td>
+                        <td id="status-gean" class="status-ocupado">Ocupado</td>
+                    </tr>
+                    <tr>
+                        <td>Luccas</td>
+                        <td>Designer</td>
+                        <td id="status-luccas" class="status-ocupado">Ocupado</td>
+                    </tr>
+                    <tr>
+                        <td>Manuella</td>
+                        <td>Marketing</td>
+                        <td id="status-manuella" class="status-ocupado">Ocupado</td>
+                    </tr>
+                    <tr>
+                        <td>Salu</td>
+                        <td>Designer</td>
+                        <td id="status-salu" class="status-ocupado">Ocupado</td>
+                    </tr>
+                    <tr>
+                        <td>Samuel</td>
+                        <td>Marketing</td>
+                        <td id="status-samuel" class="status-disponivel">Disponível</td>
+                    </tr>
+                    <tr>
+                        <td>Saulo</td>
+                        <td>Analista de Sistemas</td>
+                        <td id="status-saulo" class="status-disponivel">Disponível</td>
+                    </tr>
+                    <tr>
+                        <td>Paulina</td>
+                        <td>Analista / Dev</td>
+                        <td id="status-paulina" class="status-ocupado">Ocupado</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="container mt-5" id="chamados">
+        <h2 class="mt-5 mb-4">Chamados</h2>
+        <div class="table-responsive"> <!-- Container responsivo para a tabela -->
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Descrição</th>
+                        <th>Status</th>
+                        <th>Cliente</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#001</td>
+                        <td>Erro no sistema de login</td>
+                        <td class="chamado-status">Pendente</td>
+                        <td>Empresa XYZ</td>
+                    </tr>
+                    <tr>
+                        <td>#002</td>
+                        <td>Site fora do ar</td>
+                        <td class="chamado-status">Resolvido</td>
+                        <td>Cliente ABC</td>
+                    </tr>
+                    <tr>
+                        <td>#003</td>
+                        <td>Ajuste na funcionalidade de pagamento</td>
+                        <td class="chamado-status">Em andamento</td>
+                        <td>Loja Online LMN</td>
+                    </tr>
+                    <tr>
+                        <td>#004</td>
+                        <td>Problemas de acesso ao painel administrativo</td>
+                        <td class="chamado-status">Pendente</td>
+                        <td>Cliente DEF</td>
+                    </tr>
+                    <tr>
+                        <td>#005</td>
+                        <td>Bug na exibição de produtos</td>
+                        <td class="chamado-status">Resolvido</td>
+                        <td>Marketplace OPQ</td>
+                    </tr>
+                    <tr>
+                        <td>#006</td>
+                        <td>Erro na integração com API de terceiros</td>
+                        <td class="chamado-status">Em andamento</td>
+                        <td>Cliente RST</td>
+                    </tr>
+                    <tr>
+                        <td>#007</td>
+                        <td>Solicitação de nova funcionalidade no sistema</td>
+                        <td class="chamado-status">Pendente</td>
+                        <td>Empresa UVW</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="container mt-5" id="clientes">
+        <h2 class="mt-5 mb-4">Clientes</h2>
+        <div class="table-responsive"> <!-- Container responsivo para a tabela -->
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Maria Silva</td>
+                        <td>maria.silva@email.com</td>
+                        <td>(11) 91234-5678</td>
+                    </tr>
+                    <tr>
+                        <td>João Pereira</td>
+                        <td>joao.pereira@email.com</td>
+                        <td>(21) 98765-4321</td>
+                    </tr>
+                    <tr>
+                        <td>Ana Costa</td>
+                        <td>ana.costa@email.com</td>
+                        <td>(31) 99876-5432</td>
+                    </tr>
+                    <tr>
+                        <td>Lucas Santos</td>
+                        <td>lucas.santos@email.com</td>
+                        <td>(41) 97654-3210</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 Sua Empresa. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        const statusFuncionarios = [
+            { id: 'status-luis', status: 'Disponível' },
+            { id: 'status-eduardo', status: 'Disponível' },
+            { id: 'status-gean', status: 'Ocupado' },
+            { id: 'status-luccas', status: 'Ocupado' },
+            { id: 'status-manuella', status: 'Ocupado' },
+            { id: 'status-salu', status: 'Ocupado' },
+            { id: 'status-samuel', status: 'Disponível' },
+            { id: 'status-saulo', status: 'Disponível' },
+            { id: 'status-paulina', status: 'Ocupado' }
+        ];
+
+        const statusChamados = document.querySelectorAll('.chamado-status');
+
+        // Atualização dos funcionários
+        function atualizarFuncionarios() {
+            statusFuncionarios.forEach(({ id, status }) => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.textContent = status === 'Disponível' ? 'Ocupado' : 'Disponível';
+                    element.className = status === 'Disponível' ? 'status-ocupado' : 'status-disponivel';
+                }
+            });
+        }
+
+        // Atualização dos chamados
+        function atualizarChamados() {
+            statusChamados.forEach((element) => {
+                if (element.textContent === 'Pendente') {
+                    element.textContent = 'Resolvido';
+                }
+            });
+        }
+
+        setInterval(atualizarFuncionarios, 86400000); // 24 horas
+        setInterval(atualizarChamados, 259200000); // 72 horas
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

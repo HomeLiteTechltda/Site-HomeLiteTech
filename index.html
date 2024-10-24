@@ -1,408 +1,616 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela de cadastro</title>
-    <style>
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        html {
-            height: 100%;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300..700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <title>Home Lite Tech</title>
+  <style>
+    *{
+      font-family: 'Teko', sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    
+    body {
+      font-family: 'Teko', sans-serif;
+      margin: 0;
+      padding: 0;
+      font-weight: normal;
+      font-style: normal;
+    }
+    
+    header {
+      background-color: #1c1c1c; /* Cinza escuro para um visual elegante */
+      padding: 20px;
+    }
+    
+    #logo img {
+      width: 150px;
+    }
+    
+    #menu {
+      align-items: center;
+      display: flex;
+      gap: 1rem;
+      color: #fff;
+      font-size: 1.5rem;
+    }
+    
+    #menu a {
+      color: #fff;
+      text-decoration: none;
+      padding: 10px;
+      transition: all 0.3s ease;
+    }
+    
+    #menu a:hover {
+      color: #c79a53; /* Dourado escuro */
+    }
+    
+    #menu input {
+      margin-left: auto;
+    }
+    
+    #beginning {
+      position: relative;
+      text-align: center;
+    }
+    
+    #background-image {
+      width: 100%;
+      height: auto;
+      opacity: 1.0;
+    }
+    
+    #beginning h2 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #e0dfd5; /* Bege claro */
+      font-size: 2rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Sombra suave */
+    }
+    
+    #middle {
+      padding: 50px;
+      background-color: #2b2b2b; /* Cinza médio escuro */
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .title h2 {
+      font-size: 2rem;
+      color: #e0dfd5; /* Cor bege suave */
+    }
+    
+    .title h2 span {
+      color: #c79a53; /* Dourado escuro */
+    }
+    
+    .title p {
+      color: #a6a6a6; /* Cinza elegante */
+      font-size: 2rem;
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 50px;
+    }
+    
+    .grid-item {
+      background: #3c3c3c; /* Cinza forte para o fundo */
+      border: 1px solid #555; /* Cinza mais escuro */
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .grid-item img {
+      width: 50px;
+      margin-bottom: 15px;
+    }
+    
+    .grid-item h3 {
+      font-size: 1.5rem;
+      color: #c79a53; /* Dourado escuro */
+    }
+    
+    .grid-item p {
+      font-size: 1rem;
+      color: #e0dfd5; /* Bege claro */
+    }
+    
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    #services {
+      padding: 60px 0;
+      background-color: #1f1f1f; /* Cinza escuro */
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    h2 {
+      font-size: 2.5rem;
+      color: #e0dfd5;
+      margin-bottom: 40px;
+    }
+    
+    .grid-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Sombra mais escura */
+    }
+    
+    .grid-item h3 {
+      color: #c79a53;
+      margin-bottom: 15px;
+    }
+    
+    .grid-item p {
+      color: #a6a6a6; /* Cinza elegante */
+    }
+    
+    hr {
+      background: linear-gradient(to right, #c79a53, #e0dfd5); /* Dourado suave para bege */
+    }
+    
+    #footer ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+  }
+  
+  .footer-section {
+      background: #141414; /* Preto elegante */
+      color: #e0dfd5; /* Bege claro */
+      padding: 50px 0;
+      font-size: 16px; /* Aumenta o tamanho geral da fonte */
+  }
+  
+  .footer-cta {
+      border-bottom: 1px solid #333;
+  }
+  
+  .single-cta i {
+      color: #c79a53; /* Ícones em dourado */
+      font-size: 28px;
+      float: left;
+      margin-right: 15px;
+  }
+  
+  .cta-text h4 {
+      color: #e0dfd5;
+      font-size: 22px; /* Aumenta o título */
+      margin-bottom: 5px;
+  }
+  
+  .cta-text span {
+      color: #a6a6a6;
+      font-size: 16px; /* Aumenta o tamanho do texto */
+  }
+  
+  .footer-content {
+      padding: 40px 0;
+  }
+  
+  .footer-logo img {
+      max-width: 180px;
+  }
+  
+  .footer-text p {
+      font-size: 16px; /* Aumenta o tamanho do texto */
+      color: #a6a6a6;
+      line-height: 1.6;
+  }
+  
+  .footer-social-icon span {
+      color: #e0dfd5;
+      display: block;
+      font-size: 18px;
+      margin-bottom: 20px;
+  }
+  
+  .footer-social-icon a {
+      color: #e0dfd5;
+      font-size: 16px;
+      margin-right: 15px;
+      transition: color 0.3s;
+  }
+  
+  .footer-social-icon a:hover {
+      color: #c79a53; /* Dourado escuro ao passar o mouse */
+  }
+  
+  .footer-widget-heading h3 {
+      color: #e0dfd5;
+      font-size: 22px; /* Aumenta o título dos widgets */
+      margin-bottom: 20px;
+      position: relative;
+  }
+  
+  .footer-widget-heading h3::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -10px;
+      height: 2px;
+      width: 40px;
+      background: #c79a53; /* Linha dourada */
+  }
+  
+  .footer-widget ul li {
+      width: 50%;
+      float: left;
+      margin-bottom: 10px;
+  }
+  
+  .footer-widget ul li a {
+      color: #a6a6a6;
+      font-size: 16px; /* Aumenta o tamanho do texto dos links */
+      text-decoration: none;
+      transition: color 0.3s;
+  }
+  
+  .footer-widget ul li a:hover {
+      color: #c79a53;
+  }
+  
+  .subscribe-form input {
+      width: calc(100% - 120px); /* Aumenta a largura do input */
+      padding: 14px; /* Aumenta o padding */
+      border: 2px solid #c79a53; /* Borda dourada */
+      background: #222;
+      color: #e0dfd5;
+      font-size: 16px; /* Aumenta o tamanho da fonte */
+  }
+  
+  .subscribe-form button {
+      padding: 14px 30px; /* Aumenta o padding do botão */
+      border: none;
+      background: #c79a53;
+      color: #e0dfd5;
+      font-size: 18px; /* Aumenta o tamanho da fonte do botão */
+      cursor: pointer;
+  }
+  
+  .subscribe-form button:hover {
+      background: #e0b778; /* Tom mais claro ao passar o mouse */
+  }
+  
+  .copyright-area {
+      background: #111;
+      padding: 20px 0;
+  }
+  
+  .copyright-text p {
+      margin: 0;
+      color: #a6a6a6;
+      font-size: 16px; /* Aumenta o tamanho do texto dos direitos autorais */
+  }
+  
+  .footer-menu li {
+      display: inline-block;
+      margin-left: 15px;
+  }
+  
+  .footer-menu li a {
+      color: #a6a6a6;
+      font-size: 16px; /* Aumenta o tamanho do texto do menu */
+      transition: color 0.3s;
+  }
+  
+  .footer-menu li a:hover {
+      color: #c79a53;
+  }
+  
 
-        body {
-            height: 100%;
-            padding: 3rem 0;
-            margin: 0;
-            display: grid;
-            place-items: center;
-            font-family: Roboto, sans-serif;
-            font-weight: bold;
-            position: relative; /* Necessário para o ::before funcionar corretamente */
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('programmer-4k-wallpapers.jpg');
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            z-index: -1; /* Fica atrás do conteúdo */
-            filter: brightness(15%); /* Aplica o efeito de escurecimento */
-            opacity: 0.9; /* Controla a opacidade */
-        }
-
-        .signUpContainer {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-        }
-
-        .formContainer {
-            z-index: 1; /* Garante que o formulário apareça sobre a imagem */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 1rem 0rem;
-            border-radius: 15px;
-            width: 45%;
-            background: rgba(0, 0, 0, 0.1); /* Transparência */
-            backdrop-filter: blur(10px); /* Desfoque */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25); /* Sombra suave */
-            border: 1px solid rgba(255, 255, 255, 0.2); /* Borda leve */
-        }
-
-        .formContainer>h1 {
-            margin-bottom: 1rem;
-            font-size: 30px;
-            font-weight: bold;
-            color: #c79a53;
-        }
-
-        input {
-            border: none;
-            border: 2px solid #c79a53;
-            border-radius: 5px;
-            padding: 0.7rem;
-            margin: 0.5rem 0;
-            width: 70%;
-        }
-
-        input:focus {
-            outline: none;
-            border: 2px solid #333398;
-            transition: 0.5s;
-        }
-
-        .invalid {
-            border: 2px solid #fe4a49;
-            background-color: #74171736;
-            box-shadow: 0 0 0 30px #74171736 inset;
-        }
-
-        .submitInput {
-            width: 75%;
-            padding: 0.8rem 2rem;
-            border-radius: 7px;
-            border: none;
-            background-color: #c79a53;
-            color: #000000;
-            margin: 1rem 0;
-            cursor: pointer;
-        }
-
-        .submitInput:hover {
-            background-color: #c79a53a8;
-        }
-
-        .submitInput:disabled {
-            background-color: #c79a53;
-            color: #000000;
-        }
-
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-
-        .loginLink {
-            display: flex;
-            align-items: center;
-            font-size: 15px;
-            color: #ffffff;
-        }
-
-        .loginLink a {
-            cursor: pointer;
-            text-decoration: underline;
-            margin-left: 5px;
-        }
-
-        .loginForm {
-            display: none;
-        }
-
-        .notificationContainer {
-            display: none;
-            position: fixed;
-            top: 3%;
-            right: 3%;
-            border-radius: 5px;
-            padding: 1rem;
-            font-weight: normal;
-            width: 20rem;
-            background-color: #fff;
-        }
-
-        .notificationContainer[error] {
-            color: #ff0000;
-        }
-
-        .notificationContainer[success] {
-            color: #5cb85c;
-        }
-
-        .showLogin {
-            animation: forwards 1s moveLoginToLeft;
-        }
-
-        .hideLogin {
-            animation: forwards 1s moveLoginToRight;
-        }
-
-        .showSignUp {
-            animation: forwards 1s moveSignUpToRight;
-        }
-
-        .hideSignUp {
-            animation: forwards 1s moveSignUpToLeft;
-        }
-
-        @keyframes moveLoginToLeft {
-            from {
-                transform: translateX(200%);
-            }
-
-            to {
-                transform: translateX(-50%);
-            }
-        }
-
-        @keyframes moveLoginToRight {
-            from {
-                transform: translateX(-50%);
-            }
-
-            to {
-                transform: translateX(200%);
-            }
-        }
-
-        @keyframes moveSignUpToLeft {
-            0% {
-                transform: translateX(50%);
-            }
-
-            100% {
-                transform: translateX(-190%);
-            }
-        }
-
-        @keyframes moveSignUpToRight {
-            0% {
-                transform: translateX(-190%);
-            }
-
-            100% {
-                transform: translateX(50%);
-            }
-        }
-    </style>
+    @media (max-width: 1200px) {
+      /* Layout para telas médias, como tablets em modo paisagem ou desktops menores */
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 992px) {
+      /* Ajustes para tablets e telas maiores de celulares */
+      #menu {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    
+      #menu a {
+        margin: 10px 0;
+      }
+      
+      .grid {
+        grid-template-columns: 1fr; /* Exibe os itens em uma coluna para telas menores */
+      }
+    }
+    
+    @media (max-width: 768px) {
+      /* Estilo para celulares maiores em modo retrato */
+      header {
+        padding: 10px;
+      }
+    
+      #logo img {
+        width: 100px; /* Reduz o tamanho do logo em telas menores */
+      }
+    
+      #beginning h2 {
+        font-size: 1.5rem;
+      }
+    
+      .grid-item h3 {
+        font-size: 1.2rem; /* Reduz o tamanho dos títulos */
+      }
+    }
+    
+    @media (max-width: 576px) {
+      /* Estilo para celulares menores */
+      #menu {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    
+      #beginning h2 {
+        font-size: 1.2rem;
+      }
+    
+      .grid-item {
+        padding: 15px; /* Ajuste no padding para telas muito pequenas */
+      }
+    }
+    .footer-section h4,
+    .footer-section h3,
+    .footer-section p,
+    .footer-section span {
+        font-size: 18px; /* Aumenta o tamanho da fonte */
+    }
+    
+    .footer-widget ul li a {
+        font-size: 16px; /* Aumenta o tamanho dos links */
+    }
+    
+    .subscribe-form input {
+        width: calc(100% - 100px);
+        padding: 12px;
+        border: 2px solid #c79a53; /* Borda dourada */
+        background: #222; /* Fundo escuro */
+        color: #e0dfd5; /* Texto claro */
+        font-size: 16px; /* Aumenta o tamanho da fonte */
+        transition: border-color 0.3s; /* Transição suave para a borda */
+    }
+    
+    .subscribe-form input:focus {
+        border-color: #e0dfd5; /* Borda clara ao focar */
+        outline: none; /* Remove o contorno padrão */
+    }
+    
+    .subscribe-form button {
+        padding: 12px 25px;
+        border: none;
+        background: #c79a53; /* Fundo dourado */
+        color: #e0dfd5;
+        cursor: pointer;
+        font-size: 16px; /* Aumenta o tamanho da fonte */
+        transition: background-color 0.3s; /* Transição suave ao passar o mouse */
+    }
+    
+    .subscribe-form button:hover {
+        background: #e0dfd5; /* Muda para uma cor clara ao passar o mouse */
+        color: #141414; /* Texto escuro */
+    }  
+  </style>
 </head>
-
 <body>
-    <div class="signUpContainer">
-        <form onkeyup="signupButtonDisable()" class="formContainer" id="signUp">
-            <h1>Criar conta</h1>
-            <input id="signupEmail" type="text" placeholder="Email">
-            <input id="signupName" type="text" placeholder="Nome">
-            <input autocomplete="none" id="signupPassword" type="password" placeholder="Senha">
-            <input autocomplete="none" id="signupConfirmPassword" type="password" placeholder="Confirmar Senha">
-            <input disabled class="submitInput" type="submit" id="signUpBtn">
-            <span class="loginLink">
-                <p>Já possui uma conta ?</p>
-                <a onclick="changeForm('left')">login</a>
-            </span>
-        </form>
-
-        <form onsubmit="loginRedirect(event)" class="formContainer loginForm" id="loginForm">
-            <h1>Login</h1>
-            <input id="loginEmail" type="text" placeholder="Email">
-            <input autocomplete="none" id="loginPassword" type="password" placeholder="Senha">
-            <input class="submitInput" type="submit" id="loginBtn" value="Login">
-            <span class="loginLink">
-                <p>Não possui conta ainda?</p>
-                <a onclick="changeForm('right')">Cadastrar</a>
-            </span>
-        </form>
+  <header>
+    <div id="menu">
+      <div id="logo">
+        <img src="logo.png" alt="Logo"> 
+      </div>
+      <a href="Home.html">Home</a>
+      <a href="#middle">Sobre Nós</a>
+      <a href="mailto:homelitetechltda@gmail.com">Contato</a>
+      <a href="Faz_dowload_cod&notaFiscal.html">Crie o Seu Site</a>
     </div>
-    <div class="notificationContainer"></div>
+  </header>
 
-    <script>
-        const signUpForm = document.querySelector("#signUp");
-        const signupNameInput = document.querySelector("#signupName");
-        const signupEmailInput = document.querySelector("#signupEmail");
-        const signupPasswordInput = document.querySelector("#signupPassword");
-        const signupConfirmPasswordInput = document.querySelector("#signupConfirmPassword");
-        const signUpBtn = document.querySelector("#signUpBtn");
+  <section id="beginning">
+    <img src="https://c0.wallpaperflare.com/preview/492/652/36/lines-of-html-codes.jpg" alt="Codes" id="background-image">
+    <h2>Bem-Vindo à HomeLite Tech, a sua empresa de desenvolvimento de sites.</h2>
+  </section>
 
-        const loginForm = document.querySelector("#loginForm");
-        const loginEmailInput = document.querySelector("#loginEmail");
-        const loginPasswordInput = document.querySelector("#loginPassword");
-        const loginBtn = document.querySelector("#loginBtn");
+  <section id="middle">
+    <div class="container">
+      <div class="title">
+        <h2>Nós somos <span>ESPECIALISTAS</span></h2>
+        <p>Construindo relações duradouras.</p>
+        <p>Buscamos criar relações de longo prazo com nossos clientes por que entendemos que os projetos são organismos vivos que precisam passar por constante evolução para atender à necessidade do consumidor.</p>
+      </div>
+  
+      <div class="grid">
+        <div class="grid-item">
+          <h3>Planejamento</h3>
+          <p>Acreditamos no planejamento de ações tanto no pré-projeto quanto no pós-projeto para aumentar a eficiência das ações de tecnologia.</p>
+        </div>
+        <div class="grid-item">
+          <h3>APPS que são um sucesso!</h3>
+          <p>Nossos APPs já são utilizados por milhares de clientes todos os dias. Contamos com um time especialista no assunto para implantar uma solução robusta e confiável.</p>
+        </div>
+        <div class="grid-item">
+          <h3>Omnichannel de verdade</h3>
+          <p>O cliente é único e precisa ser atendido com excelência em todos os canais, seja no APP, site ou WhatsApp, ajudamos sua empresa a encantar os clientes.</p>
+        </div>
+        <div class="grid-item">
+          <h3>Integração de sistemas</h3>
+          <p>Integração entre sistemas de pagamento, nota fiscal eletrônica, PDV, análise de risco e logística, realizadas por nossa equipe diariamente.</p>
+        </div>
+        <div class="grid-item">
+          <h3>Consultoria e Outsourcing</h3>
+          <p>Mantenha o foco no seu negócio e deixe a TI com a gente. Nossa equipe cuidará das necessidades de tecnologia da sua empresa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        const notification = document.querySelector(".notificationContainer");
-
-        const signupButtonDisable = () => {
-            if (
-                signupNameInput.value === "" ||
-                signupEmailInput.value === "" ||
-
-                signupConfirmPasswordInput.value === "" ||
-                signupPasswordInput.value === ""
-            ) {
-                signUpBtn.setAttribute("disabled", true);
-            } else {
-                signUpBtn.removeAttribute("disabled");
-            }
-        };
-
-        const loginButtonDisable = () => {
-            if (loginEmailInput.value === "" || loginPasswordInput.value === "") {
-                loginBtn.setAttribute("disabled", true);
-            } else {
-                loginBtn.removeAttribute("disabled");
-            }
-        };
-
-        const changeForm = (direction) => {
-            if (direction === "left") {
-                loginForm.style.display = 'flex';
-                loginForm.classList.remove("hideLogin");
-                loginForm.classList.add("showLogin");
-                document.body.style.overflowY = 'hidden';
-                signUpForm.classList.remove("showSignUp");
-                signUpForm.classList.add("hideSignUp");
-                signUpForm.reset();
-                signupButtonDisable();
-            } else {
-                loginForm.classList.remove("showLogin");
-                loginForm.classList.add("hideLogin");
-                loginForm.reset();
-                loginButtonDisable();
-                document.body.style.overflowY = 'visible';
-                signUpForm.classList.remove("hideSignUp");
-                signUpForm.classList.add("showSignUp");
-            }
-        };
-
-        const messages = (message, status) => {
-            notification.removeAttribute("error");
-            notification.removeAttribute("success");
-
-            if (status === "error") {
-                notification.setAttribute("error", "");
-            } else if (status === "success") {
-                notification.setAttribute("success", "");
-            }
-
-            notification.style.display = "block";
-            notification.innerHTML = message;
-
-            setTimeout(() => {
-                notification.style.display = "none";
-            }, 3000);
-        };
-
-        const formVerification = (user) => {
-            let error = false;
-            let errorNumber = 0;
-
-            if (!user.email.match(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i)) {
-                errorNumber = 1;
-            }
-
-            if (user.password !== user.confirmPassword || user.password === "") {
-                errorNumber = 2;
-            }
-
-            return { errorNumber };
-        };
-
-        signUpForm.addEventListener("submit", (e) => {
-            e.preventDefault();
-
-            const newUser = {
-                email: signupEmailInput.value,
-                name: signupNameInput.value,
-                password: signupPasswordInput.value,
-                confirmPassword: signupConfirmPasswordInput.value,
-            };
-
-            const result = formVerification(newUser);
-
-            if (result.errorNumber === 1) {
-                signupEmailInput.classList.add("invalid");
-                return messages("O email está inválido", "error");
-            }
-
-            signupEmailInput.classList.remove("invalid");
-
-            if (result.errorNumber === 2) {
-                signupPasswordInput.classList.add("invalid");
-                signupConfirmPasswordInput.classList.add("invalid");
-                return messages("As senhas não coincidem", "error");
-            }
-
-            signupPasswordInput.classList.remove("invalid");
-            signupConfirmPasswordInput.classList.remove("invalid");
-
-
-            // Armazenar dados do usuário no localStorage
-            localStorage.setItem('user', JSON.stringify(newUser));
-
-            messages("Usuário cadastrado com sucesso", "success");
-
-            signUpForm.reset();
-            signupButtonDisable();
-
-            // Redirecionar para a tela de login
-            setTimeout(() => {
-                changeForm('left');
-            }, 1000);
-        });
-
-        loginForm.addEventListener("submit", (e) => {
-            e.preventDefault();
-
-            const loginUser = {
-                email: loginEmailInput.value,
-                password: loginPasswordInput.value,
-            };
-
-            // Recuperar dados do usuário do localStorage
-            const storedUser = JSON.parse(localStorage.getItem('user'));
-
-            if (!storedUser || storedUser.email !== loginUser.email || storedUser.password !== loginUser.password) {
-                return messages("Credenciais inválidas", "error");
-            }
-
-            messages("Login bem-sucedido", "success");
-
-            loginForm.reset();
-            loginButtonDisable();
-
-            // Redirecionar para a página Home.html
-            setTimeout(() => {
-                window.location.href = "Home.html";
-            }, 1000);
-        });
-    </script>
+  <section id="services">
+    <div class="container">
+      <h2 style="color: #c79a53;">O Que Fazemos?</h2>
+      </div>
+      <div class="grid">
+        <div class="grid-item">
+          <h3>Pré-projeto</h3>
+          <p>Nosso time de análise irá realizar o planejamento funcional da sua aplicação pensando em cada ponto da arquitetura de acordo com o volume esperado, criando uma solução escalável no longo prazo.</p>
+        </div>
+        <div class="grid-item">
+          <h3>Arquitetura de Sistemas</h3>
+          <p>Micro-serviços? Lambda? NoSql, as armas são muitas, mas elas precisam ser utilizadas de acordo com a necessidade do negócio, buscando a melhor relação de custo benefício.</p>
+        </div>
+        <div class="grid-item">
+          <h3>UX / UI</h3>
+          <p>Nossa equipe vai pensar em como deixar o usuário do seu aplicativo satisfeito em cada passo da experiência com o seu aplicativo, site ou sistema.</p>
+        </div>
+        <div class="grid-item">
+          <h3>Implementação</h3>
+          <p>Código está em nosso nome e em nosso DNA quando o assunto é programação. Pode contar com a nossa equipe para criar a solução ideal para o seu negócio.</p>
+        </div>
+        <div class="grid-item">
+          <h3>Customização total</h3>
+          <p>Sistemas flexíveis e, ao mesmo tempo, robustos e customizáveis, porque acreditamos que seu negócio é único e precisa de velocidade para responder às mudanças do mercado.</p>
+        </div>
+        <div class="grid-item">
+          <h3>APIs e Webservices</h3>
+          <p>Acreditamos que juntos podemos mais. Por isso, nossos sistemas são integrados às melhores soluções de mercado nos mais diversos segmentos. Essa é a economia baseada em APIs.</p>
+        </div>
+        <div class="grid-item">
+          <h3>Consultoria</h3>
+          <p>Queremos estar ao seu lado e viver o dia a dia do seu negócio. Por isso, você conta sempre com um atendimento consultivo que busca as soluções mais efetivas para o seu negócio.</p>
+        </div>
+        <div class="grid-item">
+          <h3>Segurança e Privacidade</h3>
+          <p>Levamos muito a sério a segurança dos usuários das nossas aplicações. Você conta com uma equipe sempre vigilante em questões de segurança e proteção de dados.</p>
+        </div>
+        <div class="grid-item">
+          <h3>Meios de pagamento</h3>
+          <p>Nossas soluções são integradas às maiores soluções de pagamento e BAAS do mercado brasileiro para que você tenha total tranquilidade no recebimento de suas transações.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <footer class="footer-section">
+    <div class="container">
+        <div class="footer-cta pt-5 pb-5">
+            <div class="row">
+                <div class="col-md-4 mb-30">
+                    <div class="single-cta">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="cta-text">
+                            <h4>Encontre a gente</h4>
+                            <span>Avenida Goiás, 789, São Caetano Do Sul</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-30">
+                    <div class="single-cta">
+                        <i class="far fa-envelope-open"></i>
+                        <div class="cta-text">
+                            <h4>Mande um email</h4>
+                            <span><a href="mailto:homelitetechltda@gmail.com">homelitetechltda@gmail.com</a></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-30">
+                  <div class="footer-widget">
+                      <h3>Links Uteis</h3>
+                      <ul id="footer">
+                          <li><a href="home.html">Home</a></li>
+                          <li><a href="#middle">Sobre</a></li>
+                          <li><a href="#services">Serviços</a></li>
+                          <li><a href="mailto:homelitetechltda@gmail.com">Contato</a></li>
+                      </ul>
+                  </div>
+              </div>
+            </div>
+        </div>
+        <div class="footer-content">
+            <div class="row">
+                <div class="col-md-4 mb-50">
+                    <div class="footer-widget">
+                        <div class="footer-logo">
+                            <a href="#"><img src="logo.png" class="img-fluid" alt="logo"></a>
+                        </div>
+                        <div class="footer-text">
+                            <p></p>
+                        </div>
+                        <div class="footer-social-icon">
+                            <span>Follow us</span>
+                            <a href="https://www.instagram.com/homelitetechltda?igsh=OTJLc2d0Z2pmb3F4"><i class="fab fa-instagram"></i></a>
+                            <a href="mailto:homelitetechltda@gmail.com"><i class="fab fa-google-plus-g"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-50">
+                    <div class="footer-widget">
+                        <h3>Inscreva-se</h3>
+                        <p>Não Perca as Novidades, Inscreva-se já</p>
+                        <div class="subscribe-form">
+                            <form action="#">
+                                <input type="text" placeholder="Endereço de email">
+                                <button><i class="fab fa-telegram-plane"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-left">
+                    <div class="copyright-text">
+                        <p>Copyright &copy; 2024, Todos os direitos reservados a <a href="#">HomeLite Tech</a></p>
+                    </div>
+                </div>
+                <div class="col-md-6 text-center text-md-right">
+                    <div class="footer-menu">
+                        <ul id="footer">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="termos.html">Termos</a></li>
+                            <li><a href="privacidade.html">Privacidade</a></li>
+                            <li><a href="mailto:homelitetechltda@gmail.com">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="https://kit.fontawesome.com/9013f23215.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="main.js"></script>
 </body>
-
 </html>
