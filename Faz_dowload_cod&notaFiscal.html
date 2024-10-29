@@ -35,8 +35,8 @@
 
             // Definindo o tema "Dracula"
             monaco.editor.defineTheme('dracula', {
-                base: 'vs-dark', // baseado no tema escuro
-                inherit: true,   // herda configurações do tema padrão
+                base: 'vs-dark',
+                inherit: true,
                 rules: [
                     { token: 'comment', foreground: '6272a4', fontStyle: 'italic' },
                     { token: 'keyword', foreground: 'ff79c6' },
@@ -54,7 +54,6 @@
                 }
             });
 
-            // Inicialização do Monaco Editor com tema "Dracula"
             const htmlEditor = monaco.editor.create(document.getElementById('html-editor'), {
                 value: '<!-- Escreva seu HTML aqui -->',
                 language: 'html',
@@ -73,7 +72,6 @@
                 theme: 'dracula'
             });
 
-            // Atualiza o iframe de preview
             function updatePreview() {
                 const html = htmlEditor.getValue();
                 const css = cssEditor.getValue();
@@ -86,20 +84,15 @@
                 iframeDoc.close();
             }
 
-            // Muda as abas do editor
             document.querySelectorAll('.tab').forEach(tab => {
                 tab.addEventListener('click', function() {
                     const target = this.dataset.target;
                     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
                     this.classList.add('active');
-
                     document.querySelectorAll('.editor').forEach((editor) => {
                         editor.style.display = 'none';
                     });
-
                     document.getElementById(target).style.display = 'block';
-
-                    // Força o Monaco Editor a se reposicionar ao mudar de aba
                     if (target === 'html-editor') {
                         htmlEditor.layout();
                     } else if (target === 'css-editor') {
@@ -110,24 +103,32 @@
                 });
             });
 
-            // Salva o código e vai para o checkout
             document.getElementById('save-button').onclick = function() {
-                const code = {
-                    html: htmlEditor.getValue(),
-                    css: cssEditor.getValue(),
-                    js: jsEditor.getValue()
-                };
-                console.log('Código salvo:', code);
                 document.querySelector('.container').style.display = 'none';
                 document.querySelector('.container-checkout').style.display = 'flex';
             };
 
-            // Completa a compra
+            function downloadFile(filename, content) {
+                const blob = new Blob([content], { type: 'text/plain' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = filename;
+                link.click();
+                URL.revokeObjectURL(link.href);
+            }
+
             document.querySelector('.purchase-btn').onclick = function() {
+                const htmlCode = htmlEditor.getValue();
+                const cssCode = cssEditor.getValue();
+                const jsCode = jsEditor.getValue();
+
+                // Baixa o arquivo de código gerado e o comprovante
+                downloadFile("codigo.html", htmlCode);
+                downloadFile("comprovante.pdf", "Comprovante de compra\nProduto: Código gerado\nValor: R$300,00");
+
                 document.querySelector('.success-animation').style.display = 'block';
             };
 
-            // Atualiza o preview sempre que o editor mudar
             htmlEditor.onDidChangeModelContent(updatePreview);
             cssEditor.onDidChangeModelContent(updatePreview);
             jsEditor.onDidChangeModelContent(updatePreview);
@@ -159,11 +160,8 @@
         </div>
     </div>
 
-    <footer>
-        <p>Desenvolvido por HomeLite Tech</p>
-    </footer>
+   
 
-    <!-- Checkout Container -->
     <div class="container-checkout">
         <div class="checkout-container">
             <h1>Checkout</h1>

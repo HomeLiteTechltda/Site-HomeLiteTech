@@ -421,12 +421,29 @@
     .subscribe-form button:hover {
         background: #e0dfd5; /* Muda para uma cor clara ao passar o mouse */
         color: #141414; /* Texto escuro */
-    }  
+    } 
+    
+    a {
+      color: #c79a53;
+      text-decoration: underline;
+  }
+  .icon-circle {
+    padding: 10px; /* Espaço ao redor do ícone */
+    border: 2px solid #c79a53; /* Borda dourada */
+    border-radius: 50%; /* Cria um círculo */
+    display: inline-block;
+    width: 50px; /* Ajuste o tamanho do círculo */
+    height: 50px;
+    text-align: center; /* Centraliza o ícone */
+    line-height: 50px; /* Centraliza verticalmente */
+  }
+  
+  
   </style>
 </head>
 <body>
   <header>
-    <div id="menu">
+    <div id="menu" class="d-flex">
       <div id="logo">
         <img src="logo.png" alt="Logo"> 
       </div>
@@ -434,8 +451,15 @@
       <a href="#middle">Sobre Nós</a>
       <a href="mailto:homelitetechltda@gmail.com">Contato</a>
       <a href="Faz_dowload_cod&notaFiscal.html">Crie o Seu Site</a>
+      <div class="ms-auto"> <!-- ms-auto coloca o ícone à direita -->
+        <a href="Funcionarios/login-funcionario.html" class="nav-link">
+          <i class="fas fa-user icon-circle"></i> Funcionários
+        </a>
+      </div>
     </div>
   </header>
+  
+  
 
   <section id="beginning">
     <img src="https://c0.wallpaperflare.com/preview/492/652/36/lines-of-html-codes.jpg" alt="Codes" id="background-image">
@@ -543,16 +567,12 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-30">
-                  <div class="footer-widget">
-                      <h3>Links Uteis</h3>
-                      <ul id="footer">
-                          <li><a href="home.html">Home</a></li>
-                          <li><a href="#middle">Sobre</a></li>
-                          <li><a href="#services">Serviços</a></li>
-                          <li><a href="mailto:homelitetechltda@gmail.com">Contato</a></li>
-                      </ul>
-                  </div>
-              </div>
+                    <div class="footer-social-icon">
+                        <span>Siga Nossa Empresa</span>
+                        <a href="https://www.instagram.com/homelitetechltda?igsh=OTJLc2d0Z2pmb3F4"><i class="fab fa-instagram"></i></a>
+                        <a href="mailto:homelitetechltda@gmail.com"><i class="fab fa-google-plus-g"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="footer-content">
@@ -564,11 +584,6 @@
                         </div>
                         <div class="footer-text">
                             <p></p>
-                        </div>
-                        <div class="footer-social-icon">
-                            <span>Follow us</span>
-                            <a href="https://www.instagram.com/homelitetechltda?igsh=OTJLc2d0Z2pmb3F4"><i class="fab fa-instagram"></i></a>
-                            <a href="mailto:homelitetechltda@gmail.com"><i class="fab fa-google-plus-g"></i></a>
                         </div>
                     </div>
                 </div>
@@ -597,7 +612,7 @@
                 </div>
                 <div class="col-md-6 text-center text-md-right">
                     <div class="footer-menu">
-                        <ul id="footer">
+                        <ul>
                             <li><a href="#">Home</a></li>
                             <li><a href="termos.html">Termos</a></li>
                             <li><a href="privacidade.html">Privacidade</a></li>
